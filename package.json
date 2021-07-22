@@ -1,0 +1,8 @@
+{
+  "name": "whale-news-watching",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/y-yanagii/whale-news-watching.git",
+  "author": "y-yanagii <yyanagisawa555@gmail.com>",
+  "license": "MIT"
+}
