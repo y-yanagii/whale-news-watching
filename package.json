@@ -5,6 +5,9 @@
   "repository": "https://github.com/y-yanagii/whale-news-watching.git",
   "author": "y-yanagii <yyanagisawa555@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "start": "node -r esm index.js"
+  },
   "devDependencies": {
     "eslint": "^7.31.0",
     "eslint-config-airbnb": "^18.2.1",
@@ -12,5 +15,9 @@
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-react": "^7.24.0",
     "eslint-plugin-react-hooks": "^1.7.0"
+  },
+  "dependencies": {
+    "esm": "^3.2.25",
+    "express": "^4.17.1"
   }
 }
