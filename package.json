@@ -6,9 +6,15 @@
   "author": "y-yanagii <yyanagisawa555@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "node -r esm index.js"
+    "start": "node -r esm index.js",
+    "babel": "babel src -x '.js,.jsx' -d views"
   },
   "devDependencies": {
+    "@babel/cli": "^7.14.8",
+    "@babel/core": "^7.14.8",
+    "@babel/preset-env": "^7.14.8",
+    "@babel/preset-react": "^7.14.5",
+    "core-js": "3",
     "eslint": "^7.31.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-plugin-import": "^2.23.4",
@@ -18,6 +24,8 @@
   },
   "dependencies": {
     "esm": "^3.2.25",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
   }
 }

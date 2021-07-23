@@ -1,3 +1,8 @@
+import React from 'react';
+import { renderToString } from 'react-dom/server';
+import CountUp from './components/CountUp';
+
+// React ElementをHTMLに変換
 const ssr = () => (`
   <html>
     <head>
@@ -6,9 +11,7 @@ const ssr = () => (`
     </head>
     <body>
       <div id="app">
-        <h1>0</h1>
-        <button type="button">+</button>
-        <p>${new Date().toTimeString()}</p>
+        ${renderToString(<CountUp />)}
       </div>
     </body>
   </html>
