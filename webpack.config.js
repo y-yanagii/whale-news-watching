@@ -3,11 +3,11 @@ const path = require('path');
 module.exports = {
   resolve: {
     // 対象にする拡張子の指定
-    extensions: ['.js', '.jsx'],
+    extensions: ['.js', '.jsx', '.ts', '.tsx'],
   },
   entry: {
     // エントリポイントの指定
-    client: './src/client.jsx',
+    client: './src/client.tsx',
   },
   output: {
     // アウトプット先のディレクトリ指定(assets)
@@ -19,7 +19,7 @@ module.exports = {
     rules: [
       {
         // 拡張子が.jsか.jsxだった場合に適用
-        test: /\.jsx?$/,
+        test: /\.ts(x?)$/,
         // node_modulesディレクトリは除外
         exclude: /node_modules/,
         use: [
@@ -42,6 +42,7 @@ module.exports = {
                     corejs: 3,
                   },
                 ],
+                '@babel/preset-typescript',
               ],
             },
           },

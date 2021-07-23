@@ -3,7 +3,7 @@ import { renderToString } from 'react-dom/server';
 import CountUp from './components/CountUp';
 
 // React ElementをHTMLに変換
-const ssr = () => (`
+const ssr = (): string => (`
   <html>
     <head>
       <title>CountUp</title>
