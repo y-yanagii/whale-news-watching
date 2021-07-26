@@ -53,12 +53,12 @@
   - 飲食店検索系のAPI
 
 
+### 以下、package.jsonのscripts
 - server	expressの立ち上げ
 - client	webpack-dev-serverの立ち上げ
 - build	frontコードのコンパイル
 - dev	開発モード。expressサーバーとwebpack-dev-serverが立ち上がる
 - start	本番モード。frontコードをコンパイルし、expressを立ち上げる
-
 ```
 "client": "webpack serve --config ./config/webpack.config.js --open --mode development",
 "server": "nodemon --exec babel-node src/server/server.js",
