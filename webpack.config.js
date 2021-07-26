@@ -7,18 +7,23 @@ module.exports = {
   },
   entry: {
     // エントリポイントの指定
-    client: './src/client.tsx',
+    client: ['./src/client.tsx'],
   },
   output: {
-    // アウトプット先のディレクトリ指定(assets)
-    path: path.resolve(__dirname, 'assets'),
+    // アウトプット先のディレクトリ指定(dist)
+    path: path.resolve(__dirname, 'dist'),
     // アウトプットするファイルの名前を指定(名前は変更しない)
     filename: '[name].js',
+  },
+  devServer: {
+    contentBase: path.join(__dirname, 'dist'),
+    port: 3000,
+    host: `localhost`,
   },
   module: {
     rules: [
       {
-        // 拡張子が.jsか.jsxだった場合に適用
+        // 拡張子が.tsか.tsxだった場合に適用
         test: /\.ts(x?)$/,
         // node_modulesディレクトリは除外
         exclude: /node_modules/,
@@ -50,4 +55,5 @@ module.exports = {
       },
     ],
   },
+  plugins: [],
 };
