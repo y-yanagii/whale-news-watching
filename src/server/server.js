@@ -1,19 +1,23 @@
 import express from 'express';
 import path from 'path';
+import config from 'config';
 
 const app = express();
+
+// configurationの導入で環境によって設定を切り替える際に利用する機能
+// 例：開発時、本番時APIのhostが違ったりrequest時のportが違ったりする差異をコードベースで環境設定を切り分けれる
+const serverConfig = config.get('server');
 
 app.use(express.static(path.resolve('./', 'dist')));
 
 app.get('/api', (req, res) => {
-  res.send({ api: 'testtest' });
+  res.send({ data: 'test' });
 });
 
 app.get('*', function(req, res) {
   res.sendFile(path.resolve('./', 'dist', 'index.html'))
 });
 
-app.listen(3000, () => {
-  console.log('server running');
-  console.log('123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890');
+app.listen(serverConfig.port, () => {
+  console.log(`server starting -> [port] ${serverConfig.port} [env] ${process.env.NODE_ENV}`);
 });
