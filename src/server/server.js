@@ -1,6 +1,7 @@
 import express from 'express';
 import path from 'path';
 import config from 'config';
+import { logger } from './logger';
 
 const app = express();
 
@@ -19,5 +20,5 @@ app.get('*', function(req, res) {
 });
 
 app.listen(serverConfig.port, () => {
-  console.log(`server starting -> [port] ${serverConfig.port} [env] ${process.env.NODE_ENV}`);
+  logger.info(`server starting -> [port] ${serverConfig.port} [env] ${process.env.NODE_ENV}`);
 });
