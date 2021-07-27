@@ -6,4 +6,7 @@ fetch('/api/').then(response => {
   console.log(response);
 });
 
-ReactDOM.render(<App/>, document.getElementById('app'));
+ReactDOM.render(
+  <App/>,
+  document.getElementById('app')
+);

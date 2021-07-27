@@ -38,9 +38,11 @@
   "dependencies": {
     "config": "^3.3.6",
     "express": "^4.17.1",
+    "history": "^5.0.0",
     "log4js": "^6.3.0",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "react-router": "^5.2.0"
   },
   "scripts": {
     "client": "webpack serve --config ./config/webpack.config.dev.js --open --mode development",
