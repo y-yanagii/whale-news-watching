@@ -74,6 +74,7 @@ const Start = () => {
               color="primary"
               className={classes.button}
               endIcon={<SearchIcon />}
+              href={'/articles'}
             >
               Whale Watching Start
             </Button>
