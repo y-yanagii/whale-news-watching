@@ -1,9 +1,13 @@
 import React from 'react';
+import Router from './Router';
+import './assets/style.css';
 
 const App = () => {
   return (
     <>
-      <div>Hello React !!!</div>
+      <main>
+        <Router />
+      </main>
     </>
   )
 };

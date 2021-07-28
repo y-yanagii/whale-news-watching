@@ -1,14 +1,14 @@
-const HtmlWebPackPlugin = require("html-webpack-plugin");
+const HtmlWebPackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
 // html-webpack-pluginはtemplateとfile名を指定することでdistされたhtmlに自動的にReactのコードへのリンクが埋め込まれる
 const htmlWebPackPlugin = new HtmlWebPackPlugin({
-  template: "./src/client/index.html",
-  filename: "./index.html"
+  template: './src/client/index.html',
+  filename: './index.html'
 });
 
 module.exports = {
-  entry: "./src/client/index.js",
+  entry: './src/client/index.js',
   output: {
     path: path.resolve('dist'),
     filename: '[name].js'
@@ -19,7 +19,7 @@ module.exports = {
         test: /\.js(x)?$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader",
+          loader: 'babel-loader',
           options: {
             presets: ['@babel/preset-env', '@babel/preset-react']
           }
@@ -27,7 +27,18 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: ["style-loader", "css-loader"]
+        use: ['style-loader', 'css-loader']
+      },
+      {
+        test: /\.(gif|png|jpe?g)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[path][name].[ext]'
+            }
+          }
+        ]
       }
     ]
   },

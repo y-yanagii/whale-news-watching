@@ -36,11 +36,18 @@
     "webpack-merge": "^5.8.0"
   },
   "dependencies": {
+    "@material-ui/core": "^4.12.2",
+    "@material-ui/icons": "^4.11.2",
+    "@material-ui/styles": "^4.11.4",
     "config": "^3.3.6",
     "express": "^4.17.1",
+    "file-loader": "^6.2.0",
+    "history": "^5.0.0",
     "log4js": "^6.3.0",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "react-router": "^5.2.0",
+    "url-loader": "^4.1.1"
   },
   "scripts": {
     "client": "webpack serve --config ./config/webpack.config.dev.js --open --mode development",
