@@ -1,9 +1,9 @@
 // test用のsetupスクリプト
 // テスト時にはDOMが存在しないため、globalにjsdomで作ったwindowオブジェクトを差し込んでいる
 // また同時に、enzymeの設定もここで行う
-const { JSDOM } = require('jsdom');
+const { JSDOM } = require("jsdom");
 
-const jsdom = new JSDOM('<!doctype html><html><body></body></html>');
+const jsdom = new JSDOM("<!doctype html><html><body></body></html>");
 const { window } = jsdom;
 
 function copyProps(src, target) {
@@ -16,7 +16,7 @@ function copyProps(src, target) {
 global.window = window;
 global.document = window.document;
 global.navigator = {
-  userAgent: 'node.js',
+  userAgent: "node.js",
 };
 global.requestAnimationFrame = function(callback) {
   return setTimeout(callback, 0);
@@ -26,6 +26,6 @@ global.cancelAnimationFrame = function(id) {
 };
 copyProps(window, global);
 
-const Adapter = require('enzyme-adapter-react-16');
+const Adapter = require("enzyme-adapter-react-16");
 
-require('enzyme').configure({adapter: new Adapter()});
+require("enzyme").configure({adapter: new Adapter()});
