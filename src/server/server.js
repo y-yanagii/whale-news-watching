@@ -3,6 +3,7 @@ import path from "path";
 import config from "config";
 import { logger } from "./logger";
 import NewsAPI from "newsapi";
+import pool from "./postgresql"; // postgresqlの設定ファイル
 
 const app = express();
 
@@ -13,7 +14,17 @@ const serverConfig = config.get("server");
 app.use(express.static(path.resolve("./", "dist")));
 
 app.get("/api", (req, res) => {
-  res.send({ data: "test" });
+  // res.send({ data: "test" });
+  pool.connect(function(err, client) {
+    if (err) {
+      console.log(err);
+    } else {
+      client.query("SELECT name FROM test", function (err, result) {
+        console.log(result);
+        res.json({ name: result.rows[0].name });
+      });
+    }
+  })
 });
 
 app.get("/api/articles", async (req, res) => {
