@@ -5,7 +5,7 @@ import { theme } from "./assets/theme";
 import App from "./App";
 
 fetch("/api/").then(res => {
-  console.log(res);
+  console.log(res.json());
 });
 
 ReactDOM.render(
