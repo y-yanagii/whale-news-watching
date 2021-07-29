@@ -16,15 +16,15 @@ app.get("/api", (req, res) => {
   res.send({ data: "test" });
 });
 
-app.get("/api/articles", (req, res) => {
+app.get("/api/articles", async (req, res) => {
   const newsapi = new NewsAPI("94694ec2cdbf458d824851f951c3dd3c");
   try {
-    newsapi.v2.everything({
+    await newsapi.v2.everything({
       q: "クジラ",
       categroy: "jp"
     }).then(response => {
-      res.json({ articles: response.articles });
-      return;
+      // console.log(response.articles);
+      res.json({ articles: response.articles});
     }).catch(error => {
       throw error;
     });

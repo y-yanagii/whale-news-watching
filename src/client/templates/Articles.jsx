@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 const Articles = () => {
 
-  const [articles, setArticles] = useState({});
+  const [articles, setArticles] = useState([]);
 
   // News Apiより記事取得
   const getNews = async () => {
@@ -15,9 +15,8 @@ const Articles = () => {
     //   console.log(error);
     //   throw error;
     // }
-    await fetch("/api/articles").then((response) => {
-      console.log(response);
-      setArticles(response);
+    fetch("/api/articles").then(res => {
+      console.log(res.json());
     });
   }
 
@@ -29,7 +28,6 @@ const Articles = () => {
   return (
     <>
       <h1>記事一覧</h1>
-      <div>{articles}</div>
     </>
   )
 }

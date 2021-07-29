@@ -4,8 +4,8 @@ import { MuiThemeProvider } from "@material-ui/core";
 import { theme } from "./assets/theme";
 import App from "./App";
 
-fetch("/api/").then(response => {
-  console.log(response);
+fetch("/api/").then(res => {
+  console.log(res);
 });
 
 ReactDOM.render(
