@@ -4,10 +4,6 @@ import { MuiThemeProvider } from "@material-ui/core";
 import { theme } from "./assets/theme";
 import App from "./App";
 
-fetch("/api/").then(res => {
-  console.log(res.json());
-});
-
 ReactDOM.render(
   <MuiThemeProvider theme={theme}>
     <App/>

@@ -15,19 +15,41 @@ const Articles = () => {
     //   console.log(error);
     //   throw error;
     // }
-    fetch("/api/articles").then(res => {
-      console.log(res.json());
-    });
+
+    // fetch("/api/articles").then(res => {
+    //   console.log(res.json());
+    // });
   }
 
   // componentDidMountと同等
   useEffect(() => {
-    getNews();
+    fetch("/api/")
+    .then(res => res.json()) // 戻り値のjsonを受け取る
+    .then((data) => {
+      // const newArticles = [];
+      data.forEach((article) => {
+        console.log(article);
+        // newArticles.push(article);
+        setArticles((prevArticles) => [...prevArticles, article]); // 受け取ったjson戻り値をセット
+      });
+    });
   }, []);
 
   return (
     <>
       <h1>記事一覧</h1>
+      <div>
+        {articles.map((article, index) => (
+          <div key={index}>
+            <p>{ article.author }</p>
+            <p>{ article.description }</p>
+            <div>{ article.url }</div>
+            <img src={ article.urlToImage } alt="" />
+            <p>{ article.content }</p>
+            <p>{ article.publishedAt }</p>
+          </div>
+        ))}
+      </div>
     </>
   )
 }
