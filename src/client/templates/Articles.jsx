@@ -4,7 +4,8 @@ import { Topics } from "../components/Articles"
 
 const Articles = () => {
 
-  const [articles, setArticles] = useState([]);
+  const [articles, setArticles] = useState([]); // 全ての記事情報
+  const [topicsArticles, setTopicsArticles] = useState([]); // トピックス領域表示する記事情報
 
   // News Apiより記事取得
   const getNews = async () => {
@@ -28,19 +29,27 @@ const Articles = () => {
     fetch("/api/")
     .then(res => res.json()) // 戻り値のjsonを受け取る
     .then((data) => {
-      // const newArticles = [];
+      const newArticles = [];
+      // 最新の記事情報取得
       data.forEach((article) => {
         console.log(article);
-        // newArticles.push(article);
+        newArticles.push(article);
         setArticles((prevArticles) => [...prevArticles, article]); // 受け取ったjson戻り値をセット
       });
+
+      // topics分の記事情報を絞る
+      // 最初の５件取得
+      setTopicsArticles(prevTopicsArticles => [...prevTopicsArticles, ...newArticles.slice(0, 5)]);
     });
   }, []);
 
   return (
     <>
       <Container maxWidth="md">
-        <Topics />
+        <Topics
+          slideArticles={topicsArticles.slice(0, 3)}
+          subTopicArticles={topicsArticles.slice(3, 5)}
+        />
         <div>
           {articles.map((article, index) => (
             <div key={index}>
