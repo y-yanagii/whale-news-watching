@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Container from "@material-ui/core/Container";
+import { Topics } from "../components/Articles"
 
 const Articles = () => {
 
@@ -39,6 +40,7 @@ const Articles = () => {
   return (
     <>
       <Container maxWidth="md">
+        <Topics />
         <div>
           {articles.map((article, index) => (
             <div key={index}>
