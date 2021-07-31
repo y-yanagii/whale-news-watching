@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Container from "@material-ui/core/Container";
 
 const Articles = () => {
 
@@ -37,19 +38,20 @@ const Articles = () => {
 
   return (
     <>
-      <h1>記事一覧</h1>
-      <div>
-        {articles.map((article, index) => (
-          <div key={index}>
-            <p>{ article.author }</p>
-            <p>{ article.description }</p>
-            <div>{ article.url }</div>
-            <img src={ article.urlToImage } alt="" />
-            <p>{ article.content }</p>
-            <p>{ article.publishedAt }</p>
-          </div>
-        ))}
-      </div>
+      <Container maxWidth="md">
+        <div>
+          {articles.map((article, index) => (
+            <div key={index}>
+              <p>{ article.author }</p>
+              <p>{ article.description }</p>
+              <div>{ article.url }</div>
+              <img src={ article.urlToImage } alt="" />
+              <p>{ article.content }</p>
+              <p>{ article.publishedAt }</p>
+            </div>
+          ))}
+        </div>
+      </Container>
     </>
   )
 }
