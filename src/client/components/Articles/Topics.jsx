@@ -1,5 +1,6 @@
 import React from "react";
 import Container from "@material-ui/core/Container";
+import PropTypes from "prop-types";
 import { SlideTopic, SubTopic } from "./index";
 
 const Topics = (props) => {
@@ -13,6 +14,12 @@ const Topics = (props) => {
       <SubTopic />
     </Container>
   )
-}
+};
+
+// propsの型チェック
+Topics.propTypes = {
+  slideArticles: PropTypes.array,
+  subTopicArticles: PropTypes.array
+};
 
 export default Topics;
