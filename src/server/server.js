@@ -4,6 +4,7 @@ import config from "config";
 import { logger } from "./logger";
 import NewsAPI from "newsapi";
 import pool from "./postgresql"; // postgresqlの設定ファイル
+import jsonData from "../../sample.json";
 
 const app = express();
 
@@ -14,19 +15,23 @@ const serverConfig = config.get("server");
 app.use(express.static(path.resolve("./", "dist")));
 
 app.get("/api", (req, res) => {
-  // res.send({ data: "test" });
-  pool.connect(function(err, client) {
-    if (err) {
-      console.log(err);
-    } else {
-      client.query("SELECT name FROM test", function (err, result) {
-        console.log(result);
-        res.json({ name: result.rows[0].name });
-      });
-    }
-  })
+  // 記事情報一覧取得(DB接続)
+  // pool.connect(function(err, client) {
+  //   if (err) {
+  //     console.log(err);
+  //   } else {
+  //     client.query("SELECT name FROM test", function (err, result) {
+  //       console.log(result);
+  //       res.json({ name: result.rows[0].name });
+  //     });
+  //   }
+  // });
+
+  // サンプル
+  res.json(jsonData);
 });
 
+// 記事一覧初期表示
 app.get("/api/articles", async (req, res) => {
   const newsapi = new NewsAPI("94694ec2cdbf458d824851f951c3dd3c");
   try {
