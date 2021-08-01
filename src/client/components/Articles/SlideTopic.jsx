@@ -8,14 +8,16 @@ import CardActionArea from "@material-ui/core/CardActionArea";
 import CardMedia from "@material-ui/core/CardMedia";
 
 const useStyles = makeStyles({
+  // 画像
   media: {
-    height: 420,
+    height: 422,
     backgroundColor: "#fff",
     overflow: "hidden",
     position: "relative",
     transition: ".3s",
     cursor: "pointer"
   },
+  // タイトル
   title: {
     textOverflow: "ellipsis",
     position: "absolute",
@@ -42,12 +44,15 @@ const SlideTopic = (props) => {
 
   return (
     <>
+      {/* スライド用ライブラリ */}
       <Carousel
         autoPlay={true}
       >
         {articles.map((article, i) => (
           <Paper key={i}>
-            <Card>
+            <Card
+              onClick={() => { console.log(article) }}
+            >
               <CardActionArea>
                 <CardMedia
                   className={classes.media}

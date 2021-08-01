@@ -32,7 +32,6 @@ const Articles = () => {
       const newArticles = [];
       // 最新の記事情報取得
       data.forEach((article) => {
-        console.log(article);
         newArticles.push(article);
         setArticles((prevArticles) => [...prevArticles, article]); // 受け取ったjson戻り値をセット
       });

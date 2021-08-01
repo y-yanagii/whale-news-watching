@@ -38,8 +38,7 @@ const Topics = (props) => {
           <SlideTopic slideArticles={props.slideArticles} />
         </div>
         <div className={classes.sub}>
-          <SubTopic />
-          <SubTopic />
+          <SubTopic subArticles={props.subTopicArticles} />
         </div>
       </div>
     </Container>
