@@ -11,10 +11,14 @@ import Typography from "@material-ui/core/Typography";
 const useStyles = makeStyles((theme) => ({
   paper: {
     width: "250px",
-    margin: "5% 1.5%",
+    margin: "5% 1.4%",
     padding: theme.spacing(2),
     textAlign: "center",
-    backgroundColor: "#35495e"
+    backgroundColor: "black",
+    border: "solid 1px #7597c1",
+    "&:hover": {
+      backgroundColor: "#2f2f2f",
+    }
   },
   // 画像
   media: {
@@ -25,13 +29,24 @@ const useStyles = makeStyles((theme) => ({
     transition: ".3s",
     cursor: "pointer",
     "&:hover": {
-      transform: "scale(1.2,1.2)",
+      transform: "scale(1.1,1.1)",
       transition: "1s all"
     }
   },
   cardContent: {
     textAlign: "left",
-    borderTop: "1px solid #EAEAEA"
+    borderTop: "1px solid #EAEAEA",
+    color: "#fff",
+    width: "100%",
+    bottom: 0,
+    cursor: "pointer",
+    height: "20%",
+    margin: 0,
+    padding: "15px",
+    fontSize: "25px",
+    transition: ".3s",
+    fontWeight: 200,
+    backgroundColor: "#666666",
   }
 }));
 

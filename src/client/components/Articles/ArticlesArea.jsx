@@ -2,16 +2,18 @@ import React from "react";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import { ArticleBigArea, ArticleMiddleArea } from "./index";
+import { ArticleBigArea, ArticleMiddleArea, ArticleSmallArea } from "./index";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Grid from "@material-ui/core/Grid";
+import List from "@material-ui/core/List";
+
 
 const useStyles = makeStyles((theme) => ({
   // 種別
   types: {
-    borderBottom: "solid 3px #06AED5",
+    borderBottom: "solid 3px #7597c1",
     [theme.breakpoints.down("md")]: {
-      width: "12%"
+      width: "17%"
     },
     [theme.breakpoints.up("md")]: {
       width: "7%"
@@ -56,6 +58,18 @@ const ArticlesArea = (props) => {
           ))}
         </Grid>
         {articleMiddle === void 0 && (<CircularProgress disableShrink />)}
+      </div>
+      {/* 小項目領域 */}
+      <div>
+        <List>
+          {articles.map((article, i) => (
+            <ArticleSmallArea
+              key={i} urlToImage={articleBig.urlToImage} author={articleBig.author}
+              title={articleBig.title} description={articleBig.description} url={articleBig.url}
+              content={articleBig.content} publishedAt={articleBig.publishedAt}
+            />
+          ))}
+        </List>
       </div>
     </Container>
   )
