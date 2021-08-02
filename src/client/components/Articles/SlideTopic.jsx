@@ -15,7 +15,11 @@ const useStyles = makeStyles({
     overflow: "hidden",
     position: "relative",
     transition: ".3s",
-    cursor: "pointer"
+    cursor: "pointer",
+    "&:hover": {
+      transform: "scale(1.2,1.2)",
+      transition: "1s all"
+    }
   },
   // タイトル
   title: {
@@ -27,7 +31,7 @@ const useStyles = makeStyles({
     backgroundColor: "#000",
     color: "#fff",
     opacity: ".6",
-    width: "95%",
+    width: "100%",
     height: "20%",
     fontSize: "25px",
     fontWeight: 200,

@@ -6,14 +6,9 @@ import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardMedia from "@material-ui/core/CardMedia";
 
-const useStyles = makeStyles({
-  // サブトピックスの最外側要素
-  paper: {
-    marginBottom: "2px"
-  },
-  // 画像
+const useStyles = makeStyles((theme) => ({
   media: {
-    height: 210,
+    height: 422,
     backgroundColor: "#fff",
     overflow: "hidden",
     position: "relative",
@@ -24,7 +19,6 @@ const useStyles = makeStyles({
       transition: "1s all"
     }
   },
-  // タイトル
   title: {
     textOverflow: "ellipsis",
     position: "absolute",
@@ -35,43 +29,45 @@ const useStyles = makeStyles({
     color: "#fff",
     opacity: ".6",
     width: "100%",
-    height: "15%",
-    fontSize: "12.5px",
+    height: "20%",
+    fontSize: "25px",
     fontWeight: 200,
     transition: ".3s",
     cursor: "pointer"
   }
-})
+}))
 
-const SubTopic = (props) => {
+const ArticleBigArea = (props) => {
   const classes = useStyles();
-
-  const subArticles = props.subArticles;
 
   return (
     <>
-      {subArticles.map((article, i) => (
-        <Paper key={i} className={classes.paper}>
-          <Card
-            onClick={() => { console.log(article) }}
-          >
-            <CardActionArea>
-              <CardMedia
-                className={classes.media}
-                image={article.urlToImage}
-                title={article.title}
-              />
-              <p className={classes.title}>{article.title}</p>
-            </CardActionArea>
-          </Card>
-        </Paper>
-      ))}
+      <Paper>
+        <Card
+          onClick={() => { console.log(props) }}
+        >
+          <CardActionArea>
+            <CardMedia
+              className={classes.media}
+              image={props.urlToImage}
+              title={props.title}
+            />
+            <p className={classes.title}>{props.title}</p>
+          </CardActionArea>
+        </Card>
+      </Paper>
     </>
   )
 }
 
-SubTopic.propTypes = {
-  subArticles: PropTypes.array
+ArticleBigArea.propTypes = {
+  urlToImage: PropTypes.string,
+  author: PropTypes.string,
+  title: PropTypes.string,
+  description: PropTypes.string,
+  url: PropTypes.string,
+  content: PropTypes.string,
+  publishedAt: PropTypes.string
 }
 
-export default SubTopic;
+export default ArticleBigArea;
