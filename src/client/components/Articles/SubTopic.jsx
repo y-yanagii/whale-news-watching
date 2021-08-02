@@ -30,7 +30,7 @@ const useStyles = makeStyles({
     backgroundColor: "#000",
     color: "#fff",
     opacity: ".6",
-    width: "90%",
+    width: "100%",
     height: "15%",
     fontSize: "12.5px",
     fontWeight: 200,

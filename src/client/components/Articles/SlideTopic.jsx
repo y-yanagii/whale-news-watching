@@ -27,7 +27,7 @@ const useStyles = makeStyles({
     backgroundColor: "#000",
     color: "#fff",
     opacity: ".6",
-    width: "95%",
+    width: "100%",
     height: "20%",
     fontSize: "25px",
     fontWeight: 200,

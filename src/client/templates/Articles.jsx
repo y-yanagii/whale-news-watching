@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Container from "@material-ui/core/Container";
-import { Topics } from "../components/Articles"
+import { Topics, ArticlesArea } from "../components/Articles";
 
 const Articles = () => {
 
@@ -33,34 +33,28 @@ const Articles = () => {
       // 最新の記事情報取得
       data.forEach((article) => {
         newArticles.push(article);
-        setArticles((prevArticles) => [...prevArticles, article]); // 受け取ったjson戻り値をセット
       });
-
+      
+      // 全ての記事情報取得
+      setArticles((prevArticles) => [...prevArticles, ...newArticles]); // 受け取ったjson戻り値をセット
       // topics分の記事情報を絞る
       // 最初の５件取得
       setTopicsArticles(prevTopicsArticles => [...prevTopicsArticles, ...newArticles.slice(0, 5)]);
     });
+    console.log("123456789");
   }, []);
-
+  
+  console.log();
   return (
     <>
-      <Container maxWidth="md">
+      <Container maxWidth="lg">
         <Topics
           slideArticles={topicsArticles.slice(0, 3)}
           subTopicArticles={topicsArticles.slice(3, 5)}
         />
-        <div>
-          {articles.map((article, index) => (
-            <div key={index}>
-              <p>{ article.author }</p>
-              <p>{ article.description }</p>
-              <div>{ article.url }</div>
-              <img src={ article.urlToImage } alt="" />
-              <p>{ article.content }</p>
-              <p>{ article.publishedAt }</p>
-            </div>
-          ))}
-        </div>
+        <ArticlesArea
+          articles={articles}
+        />
       </Container>
     </>
   )

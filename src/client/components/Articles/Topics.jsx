@@ -1,6 +1,5 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
 import PropTypes from "prop-types";
 import { SlideTopic, SubTopic } from "./index";
 
@@ -8,7 +7,10 @@ const useStyles = makeStyles((theme) => ({
   // 親領域
   topicsContainer: {
     position: "relative",
-    height: "100%"
+    height: "100%",
+    [theme.breakpoints.down("xs")]: {
+      display: "none"
+    },
   },
   // スライド領域
   slide: {
@@ -32,7 +34,7 @@ const Topics = (props) => {
   const classes = useStyles();
 
   return (
-    <Container maxWidth="md">
+    <>
       <div className={classes.topicsContainer}>
         <div className={classes.slide}>
           <SlideTopic slideArticles={props.slideArticles} />
@@ -41,7 +43,7 @@ const Topics = (props) => {
           <SubTopic subArticles={props.subTopicArticles} />
         </div>
       </div>
-    </Container>
+    </>
   )
 };
 
