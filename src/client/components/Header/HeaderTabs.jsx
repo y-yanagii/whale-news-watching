@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { makeStyles } from "@material-ui/styles";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
+import WavesIcon from "@material-ui/icons/Waves";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
 import PublicIcon from "@material-ui/icons/Public";
 import PlayCircleOutlineIcon from "@material-ui/icons/PlayCircleOutline";
@@ -9,6 +10,9 @@ import PlayCircleOutlineIcon from "@material-ui/icons/PlayCircleOutline";
 const useStyles = makeStyles({
   tabs: {
     flexGrow: 1,
+  },
+  icon: {
+    color: "#7597c1"
   }
 });
 
@@ -17,7 +21,7 @@ const HeaderTabs = () => {
   const [type, setType] = useState();
 
   const changeType = (event, newType) => {
-    console.log()
+    // newTypeは順番に0,1,2が取得できる
     setType(newType);
   }
 
@@ -30,9 +34,10 @@ const HeaderTabs = () => {
         variant="fullWidth"
         indicatorColor="primary"
       >
-        <Tab icon={<LocationOnIcon />} label="JAPAN" />
-        <Tab icon={<PublicIcon />} label="WORLD" />
-        <Tab icon={<PlayCircleOutlineIcon />} label="MOVIE" />
+        <Tab className={classes.icon} icon={<WavesIcon />} label="ALL" />
+        <Tab className={classes.icon} icon={<LocationOnIcon />} label="JAPAN" />
+        <Tab className={classes.icon} icon={<PublicIcon />} label="WORLD" />
+        <Tab className={classes.icon} icon={<PlayCircleOutlineIcon />} label="MOVIE" />
       </Tabs>
     </>
   )
