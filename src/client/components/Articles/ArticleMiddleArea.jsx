@@ -10,8 +10,8 @@ import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    width: "250px",
-    margin: "5% 1.4%",
+    width: "298px",
+    margin: "5% 1.5% -2% 1%",
     padding: theme.spacing(2),
     textAlign: "center",
     backgroundColor: "black",
