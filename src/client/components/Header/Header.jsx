@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/styles";
 import AppBar from "@material-ui/core/AppBar";
 import ToolBar from "@material-ui/core/ToolBar";
 import logo from "../../assets/img/icons/logo.png";
-import { HeaderMenus } from "./index";
+import { HeaderMenus, HeaderTabs } from "./index";
 
 const useStyles = makeStyles({
   root: {
@@ -41,6 +41,9 @@ const Header = () => {
             src={logo} alt="Whale News Watching" width="128px"
             onClick={() => console.log("ホーム画面へ")}
           />
+          <div>
+            <HeaderTabs />
+          </div>
           {isSignedIn && (
             <div className={classes.iconButtons}>
               <HeaderMenus />
