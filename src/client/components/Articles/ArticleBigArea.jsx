@@ -7,6 +7,11 @@ import CardActionArea from "@material-ui/core/CardActionArea";
 import CardMedia from "@material-ui/core/CardMedia";
 
 const useStyles = makeStyles((theme) => ({
+  articleBig: {
+    padding: theme.spacing(2),
+    backgroundColor: "black",
+    border: "solid 1px #7597c1",
+  },
   media: {
     height: 422,
     backgroundColor: "#fff",
@@ -42,7 +47,7 @@ const ArticleBigArea = (props) => {
 
   return (
     <>
-      <Paper>
+      <Paper className={classes.articleBig}>
         <Card
           onClick={() => { console.log(props) }}
         >

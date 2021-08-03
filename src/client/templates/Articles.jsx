@@ -1,8 +1,17 @@
 import React, { useEffect, useState } from "react";
 import Container from "@material-ui/core/Container";
 import { Topics, ArticlesArea } from "../components/Articles";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles({
+  root: {
+    marginTop: "9%"
+  }
+});
 
 const Articles = () => {
+
+  const classes = useStyles();
 
   const [articles, setArticles] = useState([]); // 全ての記事情報
   const [topicsArticles, setTopicsArticles] = useState([]); // トピックス領域表示する記事情報
@@ -47,7 +56,7 @@ const Articles = () => {
   console.log();
   return (
     <>
-      <Container maxWidth="lg">
+      <Container maxWidth="lg" className={classes.root}>
         <Topics
           slideArticles={topicsArticles.slice(0, 3)}
           subTopicArticles={topicsArticles.slice(3, 5)}
