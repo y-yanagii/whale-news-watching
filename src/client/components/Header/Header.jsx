@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/styles";
 import AppBar from "@material-ui/core/AppBar";
 import ToolBar from "@material-ui/core/ToolBar";
 import logo from "../../assets/img/icons/logo.png";
-import { HeaderMenus, HeaderTabs } from "./index";
+import { HeaderMenus, HeaderTabs, HeaderSearch } from "./index";
 
 const useStyles = makeStyles({
   root: {
@@ -18,9 +18,12 @@ const useStyles = makeStyles({
   toolBar: {
     width: "100%",
     "& > img": {
-      margin: "0 auto 0 0",
+      margin: "0 1% 0 0",
       cursor: "pointer"
     }
+  },
+  tabs: {
+    margin: "auto"
   },
   iconButtons: {
     margin: "0 3% 0 auto"
@@ -41,6 +44,9 @@ const Header = () => {
             onClick={() => console.log("ホーム画面へ")}
           />
           <div>
+            <HeaderSearch />
+          </div>
+          <div className={classes.tabs}>
             <HeaderTabs />
           </div>
           {isSignedIn && (
