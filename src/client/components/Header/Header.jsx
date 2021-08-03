@@ -10,9 +10,8 @@ const useStyles = makeStyles({
     flexGrow: 1,
   },
   menuBar: {
-    backgroundColr: "#fff",
     color: "white",
-    backgroundColor: "black",
+    backgroundColor: "#1b1b1b",
     border: "solid 1px #7597c1",
     borderRadius: "6px"
   },

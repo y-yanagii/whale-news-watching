@@ -11,9 +11,15 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
     backgroundColor: "black",
     border: "solid 1px #7597c1",
+    marginTop: "8px"
   },
   media: {
-    height: 422,
+    [theme.breakpoints.up("sm")]: {
+      height: 350,
+    },
+    [theme.breakpoints.down("sm")]: {
+      height: 175,
+    },
     backgroundColor: "#fff",
     overflow: "hidden",
     position: "relative",
@@ -35,7 +41,12 @@ const useStyles = makeStyles((theme) => ({
     opacity: ".6",
     width: "100%",
     height: "20%",
-    fontSize: "25px",
+    [theme.breakpoints.up("sm")]: {
+      fontSize: "25px",
+    },
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "15px",
+    },
     fontWeight: 200,
     transition: ".3s",
     cursor: "pointer"

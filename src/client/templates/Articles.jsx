@@ -3,11 +3,16 @@ import Container from "@material-ui/core/Container";
 import { Topics, ArticlesArea } from "../components/Articles";
 import { makeStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
-    marginTop: "9%"
+    [theme.breakpoints.up("sm")]: {
+      marginTop: "9%"
+    },
+    [theme.breakpoints.down("sm")]: {
+      marginTop: "30%"
+    }
   }
-});
+}));
 
 const Articles = () => {
 

@@ -7,13 +7,14 @@ import ListItemText from "@material-ui/core/ListItemText";
 
 const useStyles = makeStyles({
   list: {
-    width: "65%",
+    width: "85%",
     border: "solid 1px #7597c1",
     backgroundColor: "black",
     color: "white",
-    margin: "1% auto",
-    borderRadius: "5px",
+    margin: "0 0 2.5% auto",
+    borderRadius: "4px",
     cursor: "pointer",
+    paddingLeft: 0,
     "&:hover": {
       backgroundColor: "#2f2f2f",
     }
