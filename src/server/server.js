@@ -21,24 +21,6 @@ app.use("/api", (() => {
   return router;
 })());
 
-// api用のrouter読み込み
-// app.get("/api", (req, res) => {
-//   // 記事情報一覧取得(DB接続)
-//   pool.connect(function(err, client) {
-//     if (err) {
-//       console.log(err);
-//     } else {
-//       client.query("SELECT * FROM articles", function (err, result) {
-//         console.log(result.rows);
-//         res.json(result.rows);
-//       });
-//     }
-//   });
-
-//   // サンプル
-//   // res.json(jsonData);
-// });
-
 // 記事一覧初期表示
 // app.get("/api/articles", async (req, res) => {
 //   const newsapi = new NewsAPI("94694ec2cdbf458d824851f951c3dd3c");

@@ -7,7 +7,7 @@ router.get("/*", (req, res) => {
     if (err) {
       console.log(err);
     } else {
-      client.query("SELECT * FROM articles", function (err, result) {
+      client.query("SELECT * FROM articles ORDER BY published_at", function (err, result) {
         console.log(result.rows);
         res.json(result.rows);
       });
