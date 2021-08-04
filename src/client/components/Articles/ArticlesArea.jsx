@@ -63,11 +63,11 @@ const ArticlesArea = (props) => {
           {/* 中項目領域 */}
           <div>
             <Grid container spacing={3}>
-              {articleMiddle.map((article, i) => (
+              {articleMiddle.map((article) => (
                 <ArticleMiddleArea
-                  key={i} urlToImage={articleBig.urlToImage} author={articleBig.author}
-                  title={articleBig.title} description={articleBig.description} url={articleBig.url}
-                  content={articleBig.content} publishedAt={articleBig.publishedAt}
+                  key={article.id} urlToImage={article.urlToImage} author={article.author}
+                  title={article.title} description={article.description} url={article.url}
+                  content={article.content} publishedAt={article.publishedAt}
                 />
               ))}
             </Grid>
@@ -78,9 +78,9 @@ const ArticlesArea = (props) => {
           {/* 小項目領域 */}
           <div>
             <List>
-              {articles.map((article, i) => (
+              {articles.map((article) => (
                 <ArticleSmallArea
-                  key={i} urlToImage={article.urlToImage} author={article.author}
+                  key={article.id} urlToImage={article.urlToImage} author={article.author}
                   title={article.title} description={article.description} url={article.url}
                   content={article.content} publishedAt={article.publishedAt}
                 />

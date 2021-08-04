@@ -3,8 +3,6 @@ import path from "path";
 import config from "config";
 import { logger } from "./logger";
 import NewsAPI from "newsapi";
-import pool from "./postgresql"; // postgresqlの設定ファイル
-import jsonData from "../../sample.json";
 
 const app = express();
 
@@ -14,41 +12,32 @@ const serverConfig = config.get("server");
 
 app.use(express.static(path.resolve("./", "dist")));
 
-app.get("/api", (req, res) => {
-  // 記事情報一覧取得(DB接続)
-  // pool.connect(function(err, client) {
-  //   if (err) {
-  //     console.log(err);
-  //   } else {
-  //     client.query("SELECT name FROM test", function (err, result) {
-  //       console.log(result);
-  //       res.json({ name: result.rows[0].name });
-  //     });
-  //   }
-  // });
-
-  // サンプル
-  res.json(jsonData);
-});
+// api用のrouter読み込み(即時関数)
+app.use("/api", (() => {
+  let router = express.Router();
+  router.use("/articles", require("./api/articles.js")); // 記事情報関連API
+  // router.use("/sample", require("./api/sample.js")); // テストデータ作成
+  return router;
+})());
 
 // 記事一覧初期表示
-app.get("/api/articles", async (req, res) => {
-  const newsapi = new NewsAPI("94694ec2cdbf458d824851f951c3dd3c");
-  try {
-    await newsapi.v2.everything({
-      q: "クジラ",
-      categroy: "jp"
-    }).then(response => {
-      // console.log(response.articles);
-      res.json({ articles: response.articles});
-    }).catch(error => {
-      throw error;
-    });
-  } catch(error) {
-    console.log(error);
-    throw error;
-  }
-});
+// app.get("/api/articles", async (req, res) => {
+//   const newsapi = new NewsAPI("94694ec2cdbf458d824851f951c3dd3c");
+//   try {
+//     await newsapi.v2.everything({
+//       q: "クジラ",
+//       categroy: "jp"
+//     }).then(response => {
+//       // console.log(response.articles);
+//       res.json({ articles: response.articles});
+//     }).catch(error => {
+//       throw error;
+//     });
+//   } catch(error) {
+//     console.log(error);
+//     throw error;
+//   }
+// });
 
 app.get("*", function(req, res) {
   res.sendFile(path.resolve("./", "dist", "index.html"))

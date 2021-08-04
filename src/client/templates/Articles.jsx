@@ -40,13 +40,26 @@ const Articles = () => {
 
   // componentDidMountと同等
   useEffect(() => {
-    fetch("/api/")
+    fetch("/api/articles")
     .then(res => res.json()) // 戻り値のjsonを受け取る
     .then((data) => {
       const newArticles = [];
       // 最新の記事情報取得
       data.forEach((article) => {
-        newArticles.push(article);
+        newArticles.push({
+          id: article.id,
+          sourceName: article.source_name,
+          author: article.author,
+          title: article.title,
+          description: article.description,
+          url: article.url,
+          urlToImage: article.url_to_image,
+          publishedAt: article.published_at,
+          content: article.content,
+          articleType: article.article_type,
+          createdAt: article.created_at,
+          updatedAt: article.updated_at
+        });
       });
       
       // 全ての記事情報取得
