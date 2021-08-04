@@ -16,19 +16,20 @@ app.use(express.static(path.resolve("./", "dist")));
 
 app.get("/api", (req, res) => {
   // 記事情報一覧取得(DB接続)
-  // pool.connect(function(err, client) {
-  //   if (err) {
-  //     console.log(err);
-  //   } else {
-  //     client.query("SELECT name FROM test", function (err, result) {
-  //       console.log(result);
-  //       res.json({ name: result.rows[0].name });
-  //     });
-  //   }
-  // });
+  pool.connect(function(err, client) {
+    if (err) {
+      console.log(err);
+    } else {
+      client.query("SELECT * FROM articles", function (err, result) {
+        console.log("query結果 --------------------");
+        console.log(result);
+        res.json(result.rows);
+      });
+    }
+  });
 
   // サンプル
-  res.json(jsonData);
+  // res.json(jsonData);
 });
 
 // 記事一覧初期表示
