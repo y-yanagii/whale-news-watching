@@ -3,8 +3,6 @@ import path from "path";
 import config from "config";
 import { logger } from "./logger";
 import NewsAPI from "newsapi";
-// import pool from "./postgresql"; // postgresqlの設定ファイル
-import jsonData from "../../sample.json";
 
 const app = express();
 
@@ -18,6 +16,7 @@ app.use(express.static(path.resolve("./", "dist")));
 app.use("/api", (() => {
   let router = express.Router();
   router.use("/articles", require("./api/articles.js")); // 記事情報関連API
+  // router.use("/sample", require("./api/sample.js")); // テストデータ作成
   return router;
 })());
 
