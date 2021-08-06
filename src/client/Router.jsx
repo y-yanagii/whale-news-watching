@@ -1,7 +1,7 @@
 import React from "react";
 import { Router as Routers, Route, Switch } from "react-router";
 import { createBrowserHistory } from "history";
-import { Start, Articles, NotFound } from "./templates";
+import { Start, Articles, ArticleDetail, NotFound } from "./templates";
 
 const Router = () => {
   // (/)?は/があってもなくても可という意味
@@ -12,6 +12,7 @@ const Router = () => {
       <Switch>
         <Route exact path={"(/)?"} component={Start} />
         <Route exact path={"/articles"} component={Articles} />
+        <Route exact path={"/article/:id?"} component={ArticleDetail} />
         <Route component={NotFound} />
       </Switch>
     </Routers>

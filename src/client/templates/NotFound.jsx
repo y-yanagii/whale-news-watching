@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Whale from "../assets/img/src/whale03.jpg";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles({
   backImage: {
     height: "calc(100vh)",
     backgroundImage: `url(${Whale})`,
@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: "400px",
     fontSize: "25px"
   }
-}));
+});
 
 const NotFound = () => {
   const classes = useStyles();
