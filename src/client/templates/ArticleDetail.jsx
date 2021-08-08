@@ -4,45 +4,37 @@ import Container from "@material-ui/core/Container";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
-  detail: {
-
+  detailArea: {
+    marginTop: "130px"
   }
 }));
 
 const ArticleDetail = () => {
+  console.log("aaaaaa");
   const classes = useStyles();
   const location = useLocation();
   const id = location.pathname.split("/articles/")[1]; // :id部分をURLから取得
-  const [article, setArticle] = useState({});
+  const [article, setArticle] = useState(null);
 
   useEffect(() => {
     // 記事情報取得
     fetch("/api/articles/" + id, )
     .then(res => res.json())
     .then((data) => {
-      const articleInfo = {
-        id: data.id,
-        sourceName: data.source_name,
-        author: data.author,
-        title: data.title,
-        description: data.description,
-        url: data.url,
-        urlToImage: data.url_to_image,
-        publishedAt: data.published_at,
-        content: data.content,
-        articleType: data.article_type,
-        createdAt: data.created_at,
-        updatedAt: data.updated_at
-      };
-
-      setArticle(articleInfo);
+      setArticle(data);
     });
   }, []);
 
   return (
-    <Container maxWidth="lg">
-      <div>{article.title}</div>
-    </Container>
+    <>
+      <Container maxWidth="lg">
+        <div className={classes.detailArea}>
+          { article && (
+            <div>{article.title}</div>
+          )}
+        </div>
+      </Container>
+    </>
   )
 }
 
