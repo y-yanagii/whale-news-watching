@@ -43,10 +43,8 @@ const ArticlesArea = (props) => {
   const articleBig = props.articles.shift(); // 大項目の記事要素
 
   const goToArticleDetail = useCallback((id) => {
-    console.log("hhjfjeijfiejfiejifjei");
-    console.log(id);
     // 記事詳細画面へ遷移
-    dispatch(push("/article/" + id));
+    dispatch(push("/articles/" + id));
   });
 
   return (

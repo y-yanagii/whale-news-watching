@@ -70,8 +70,7 @@ const Articles = () => {
     });
     console.log("123456789");
   }, []);
-  
-  console.log();
+
   return (
     <>
       <Container maxWidth="lg" className={classes.root}>
