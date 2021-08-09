@@ -60,7 +60,7 @@ const ArticleBigArea = (props) => {
     <>
       <Paper className={classes.articleBig}>
         <Card
-          onClick={() => { console.log(props) }}
+          onClick={() => props.showDetail(props.id)}
         >
           <CardActionArea>
             <CardMedia
@@ -77,13 +77,15 @@ const ArticleBigArea = (props) => {
 }
 
 ArticleBigArea.propTypes = {
+  id: PropTypes.number,
   urlToImage: PropTypes.string,
   author: PropTypes.string,
   title: PropTypes.string,
   description: PropTypes.string,
   url: PropTypes.string,
   content: PropTypes.string,
-  publishedAt: PropTypes.string
+  publishedAt: PropTypes.string,
+  showDetail: PropTypes.func
 }
 
 export default ArticleBigArea;

@@ -6,7 +6,7 @@ import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles((theme) => ({
   root: {
     [theme.breakpoints.up("sm")]: {
-      marginTop: "9%"
+      marginTop: "130px"
     },
     [theme.breakpoints.down("sm")]: {
       marginTop: "30%"
@@ -70,8 +70,7 @@ const Articles = () => {
     });
     console.log("123456789");
   }, []);
-  
-  console.log();
+
   return (
     <>
       <Container maxWidth="lg" className={classes.root}>

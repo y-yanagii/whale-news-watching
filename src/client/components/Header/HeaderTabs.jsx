@@ -18,7 +18,7 @@ const useStyles = makeStyles({
 
 const HeaderTabs = () => {
   const classes = useStyles();
-  const [type, setType] = useState();
+  const [type, setType] = useState(0); // 初期値ALL
 
   const changeType = (event, newType) => {
     // newTypeは順番に0,1,2が取得できる
