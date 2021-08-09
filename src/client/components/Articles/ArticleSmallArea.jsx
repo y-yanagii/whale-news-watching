@@ -38,7 +38,7 @@ const ArticleSmallArea = (props) => {
   const classes = useStyles();
 
   return (
-    <ListItem key={props.key} className={classes.list}>
+    <ListItem className={classes.list}>
       <ListItemText
         primary={props.title}
         className={classes.listText}
@@ -54,7 +54,6 @@ const ArticleSmallArea = (props) => {
 
 // propsの型チェック
 ArticleSmallArea.propTypes = {
-  key: PropTypes.number,
   urlToImage: PropTypes.string,
   author: PropTypes.string,
   title: PropTypes.string,

@@ -44,7 +44,7 @@ const ArticlesArea = (props) => {
 
   const goToArticleDetail = useCallback((id) => {
     // 記事詳細画面へ遷移
-    dispatch(push("/articles/" + id));
+    dispatch(push(`/articles/${id}`));
   });
 
   return (

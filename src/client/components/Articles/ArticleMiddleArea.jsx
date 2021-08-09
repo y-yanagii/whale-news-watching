@@ -55,7 +55,7 @@ const ArticleMiddleArea = (props) => {
   const classes = useStyles();
 
   return (
-    <Paper key={props.key} className={classes.paper}>
+    <Paper className={classes.paper}>
       <Card
         onClick={() => console.log(props)}
       >
@@ -78,7 +78,6 @@ const ArticleMiddleArea = (props) => {
 
 // propsの型チェック
 ArticleMiddleArea.propTypes = {
-  key: PropTypes.number,
   urlToImage: PropTypes.string,
   author: PropTypes.string,
   title: PropTypes.string,

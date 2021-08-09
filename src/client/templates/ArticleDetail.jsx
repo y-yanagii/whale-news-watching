@@ -15,10 +15,11 @@ const ArticleDetail = () => {
   const location = useLocation();
   const id = location.pathname.split("/articles/")[1]; // :id部分をURLから取得
   const [article, setArticle] = useState(null);
-
+  
   useEffect(() => {
+    console.log("useEffect");
     // 記事情報取得
-    fetch("/api/articles/" + id, )
+    fetch("/api/articles/" + id)
     .then(res => res.json())
     .then((data) => {
       setArticle(data);
@@ -32,6 +33,7 @@ const ArticleDetail = () => {
           { article && (
             <div>{article.title}</div>
           )}
+          <div>aaaaaaaaaaaaaa</div>
         </div>
       </Container>
     </>
