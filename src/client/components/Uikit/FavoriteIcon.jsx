@@ -26,8 +26,8 @@ const FavoriteIcon = (props) => {
   }
 
   return (
-    <div className={classes.iconPosition} onClick={favoriteToggle(id)}>
-      <IconButton className={classes.icon}>
+    <div className={classes.iconPosition}>
+      <IconButton className={classes.icon} onClick={() => favoriteToggle(id)}>
         <FavoriteBorderIcon />
       </IconButton>
     </div>

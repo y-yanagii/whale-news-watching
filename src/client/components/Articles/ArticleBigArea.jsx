@@ -50,7 +50,11 @@ const useStyles = makeStyles((theme) => ({
     },
     fontWeight: 200,
     transition: ".3s",
-    cursor: "pointer"
+    cursor: "pointer",
+    display: "-webkit-box",
+    overflow: "hidden",
+    "-webkit-line-clamp": 2,
+    "-webkit-box-orient": "vertical"
   }
 }))
 
