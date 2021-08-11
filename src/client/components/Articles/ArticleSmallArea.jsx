@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import ListItemText from "@material-ui/core/ListItemText";
+import { FavoriteIcon } from "../Uikit";
 
 const useStyles = makeStyles({
   list: {
@@ -48,12 +49,14 @@ const ArticleSmallArea = (props) => {
           <img src={props.urlToImage} className={classes.image} alt="" />
         </div>
       </ListItemAvatar>
+      <FavoriteIcon id={props.id} />
     </ListItem>
   )
 }
 
 // propsの型チェック
 ArticleSmallArea.propTypes = {
+  id: PropTypes.number,
   urlToImage: PropTypes.string,
   author: PropTypes.string,
   title: PropTypes.string,

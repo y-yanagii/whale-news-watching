@@ -85,7 +85,7 @@ const ArticlesArea = (props) => {
             <List>
               {articles.map((article) => (
                 <ArticleSmallArea
-                  key={article.id} urlToImage={article.urlToImage} author={article.author}
+                  key={article.id} id={article.id} urlToImage={article.urlToImage} author={article.author}
                   title={article.title} description={article.description} url={article.url}
                   content={article.content} publishedAt={article.publishedAt}
                   showDetail={goToArticleDetail}

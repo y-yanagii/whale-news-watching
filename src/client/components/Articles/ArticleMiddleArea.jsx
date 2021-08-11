@@ -11,7 +11,7 @@ import { FavoriteIcon } from "../Uikit";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    width: "296px",
+    width: "288px",
     margin: "5% 1.5% -2% 1%",
     padding: theme.spacing(2),
     textAlign: "center",

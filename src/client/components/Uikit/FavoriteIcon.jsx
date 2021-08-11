@@ -6,7 +6,7 @@ import { makeStyles } from "@material-ui/styles";
 
 const useStyles = makeStyles({
   iconPosition: {
-    position: "sticky",
+    position: "inherit",
     bottom: 0,
     textAlign: "right"
   },
