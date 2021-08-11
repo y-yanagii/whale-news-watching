@@ -69,7 +69,7 @@ const ArticlesArea = (props) => {
             <Grid container spacing={3}>
               {articleMiddle.map((article) => (
                 <ArticleMiddleArea
-                  key={article.id} urlToImage={article.urlToImage} author={article.author}
+                  key={article.id} id={article.id} urlToImage={article.urlToImage} author={article.author}
                   title={article.title} description={article.description} url={article.url}
                   content={article.content} publishedAt={article.publishedAt}
                   showDetail={goToArticleDetail}

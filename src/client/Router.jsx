@@ -11,7 +11,7 @@ const Router = () => {
       <Route exact path={"(/)?"} component={Start} />
       <Route exact path={"/articles"} component={Articles} />
       <Route exact path={"/articles/:id?"} component={ArticleDetail} />
-      <Route exact path={"/favorites"} component={Favorites} />
+      <Route exact path={"/favarites"} component={Favorites} />
       <Route component={NotFound} />
     </Switch>
   )
