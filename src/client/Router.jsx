@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Switch } from "react-router";
-import { Start, Articles, ArticleDetail, NotFound } from "./templates";
+import { ArticleDetail, Articles, Favorites, Start, NotFound } from "./templates";
 
 const Router = () => {
   // (/)?は/があってもなくても可という意味
@@ -11,6 +11,7 @@ const Router = () => {
       <Route exact path={"(/)?"} component={Start} />
       <Route exact path={"/articles"} component={Articles} />
       <Route exact path={"/articles/:id?"} component={ArticleDetail} />
+      <Route exact path={"/favarites"} component={Favorites} />
       <Route component={NotFound} />
     </Switch>
   )

@@ -7,10 +7,11 @@ import CardActionArea from "@material-ui/core/CardActionArea";
 import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
+import { FavoriteIcon } from "../Uikit";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    width: "296px",
+    width: "288px",
     margin: "5% 1.5% -2% 1%",
     padding: theme.spacing(2),
     textAlign: "center",
@@ -38,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
     borderTop: "1px solid #EAEAEA",
     color: "#fff",
     width: "95%",
-    height: "20%",
+    height: "65px",
     minHeight: "52px",
     bottom: 0,
     cursor: "pointer",
@@ -48,6 +49,12 @@ const useStyles = makeStyles((theme) => ({
     transition: ".3s",
     fontWeight: 200,
     backgroundColor: "#666666",
+  },
+  articleTitle: {
+    display: "-webkit-box",
+    overflow: "hidden",
+    "-webkit-line-clamp": 3,
+    "-webkit-box-orient": "vertical"
   }
 }));
 
@@ -66,18 +73,20 @@ const ArticleMiddleArea = (props) => {
             title={props.title}
           />
           <CardContent className={classes.cardContent}>
-            <Typography gutterBottom component="p">
+            <Typography gutterBottom component="p" className={classes.articleTitle}>
               {props.title}
             </Typography>
           </CardContent>
         </CardActionArea>
       </Card>
+      <FavoriteIcon id={props.id} />
     </Paper>
   )
 }
 
 // propsの型チェック
 ArticleMiddleArea.propTypes = {
+  id: PropTypes.number,
   urlToImage: PropTypes.string,
   author: PropTypes.string,
   title: PropTypes.string,

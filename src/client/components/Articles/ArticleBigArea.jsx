@@ -5,6 +5,7 @@ import { Paper } from "@material-ui/core";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardMedia from "@material-ui/core/CardMedia";
+import { FavoriteIcon } from "../Uikit";
 
 const useStyles = makeStyles((theme) => ({
   articleBig: {
@@ -49,7 +50,11 @@ const useStyles = makeStyles((theme) => ({
     },
     fontWeight: 200,
     transition: ".3s",
-    cursor: "pointer"
+    cursor: "pointer",
+    display: "-webkit-box",
+    overflow: "hidden",
+    "-webkit-line-clamp": 2,
+    "-webkit-box-orient": "vertical"
   }
 }))
 
@@ -71,6 +76,7 @@ const ArticleBigArea = (props) => {
             <p className={classes.title}>{props.title}</p>
           </CardActionArea>
         </Card>
+        <FavoriteIcon id={props.id} />
       </Paper>
     </>
   )
