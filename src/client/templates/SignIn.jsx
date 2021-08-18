@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useCallback, useState } from "react";
+import { useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
 import Whale from "../assets/img/src/whale-sm.jpg";
+import { TextInputOutline } from "../components/Uikit";
 
 const useStyles = makeStyles((theme) => ({
   // 背景画像設定
@@ -31,11 +33,31 @@ const useStyles = makeStyles((theme) => ({
     margin: "5% 1.5% -2% 1%",
     padding: "16px",
     backgroundColor: "black"
+  },
+  title: {
+    color: "#7597c1",
+    fontSize: "1.563rem",
+    margin: "0 auto 1rem auto",
+    textAlign: "center"
   }
 }))
 
 const SignIn = () => {
   const classes = useStyles();
+
+  const dispatch = useDispatch();
+
+  const [email, setEmail] = useState(""),
+        [password, setPassword] = useState("");
+  
+  // useCallback
+  const inputEmail = useCallback((event) => {
+    setEmail(event.target.value);
+  }, [setEmail]);
+
+  const inputPassword = useCallback((event) => {
+    setPassword(event.target.value);
+  }, [setPassword]);
 
   return (
     <>
@@ -43,7 +65,18 @@ const SignIn = () => {
       <Container maxWidth="xl" className={classes.backImage}>
       <Typography component="div">
         <div className={classes.catchphrase}>
-          sss
+          <div>
+            <h2 className={classes.title}>Sign In</h2>
+          </div>
+          <div className="module-spacer--medium" />
+          <TextInputOutline
+            fullWidth={true} label={"Email"} multiline={false} required={true}
+            rows={1} value={email} type={"email"} onChange={inputEmail}
+          />
+          <TextInputOutline
+            fullWidth={true} label={"password"} multiline={false} required={true}
+            rows={1} value={password} type={"password"} onChange={inputPassword}
+          />
         </div>
       </Typography>
       </Container>
