@@ -6,6 +6,8 @@ import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
 import Whale from "../assets/img/src/whale-sm.jpg";
 import { TextInputOutline } from "../components/Uikit";
+import Button from "@material-ui/core/Button";
+import DoubleArrowIcon from "@material-ui/icons/DoubleArrow";
 
 const useStyles = makeStyles((theme) => ({
   // 背景画像設定
@@ -45,7 +47,12 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "1.563rem",
     margin: "0 auto 1rem auto",
     textAlign: "center"
-  }
+  },
+  button: {
+    color: "#fff",
+    margin: theme.spacing(1),
+    fontFamily: "initial",
+  },
 }))
 
 const SignIn = () => {
@@ -82,6 +89,15 @@ const SignIn = () => {
             fullWidth={true} label={"password"} multiline={false} required={true}
             rows={1} value={password} type={"password"} onChange={inputPassword}
           />
+          <Button
+            variant="contained"
+            color="primary"
+            className={classes.button}
+            endIcon={<DoubleArrowIcon />}
+            href={"/articles"}
+          >
+            Sign In
+          </Button>
         </div>
       </Typography>
       </Container>
