@@ -25,7 +25,13 @@ const useStyles = makeStyles((theme) => ({
     transform: "translate(-50%, -50%)",
     textAlign: "center",
     [theme.breakpoints.up("sm")]: {
-      fontSize: "3rem"
+      fontSize: "3rem",
+      width: "50%",
+      maxWidth: "500px",
+      minWidth: "450px"
+    },
+    [theme.breakpoints.down("xs")]: {
+      width: "90%",
     },
     color: "#f3f9f9",
     width: "350px",
@@ -68,7 +74,6 @@ const SignIn = () => {
           <div>
             <h2 className={classes.title}>Sign In</h2>
           </div>
-          <div className="module-spacer--medium" />
           <TextInputOutline
             fullWidth={true} label={"Email"} multiline={false} required={true}
             rows={1} value={email} type={"email"} onChange={inputEmail}

@@ -5,9 +5,16 @@ import PropTypes from "prop-types";
 
 const useStyles = makeStyles({
   textField: {
-    borderWidth: "1px",
-    borderColor: "yellow !important"
-  }
+    "& > label": {
+      color: "#7597c1"
+    },
+    "& > div": {
+      color: "#7597c1",
+      "& > fieldset": {
+        borderColor: "#7597c1",
+      },
+    },
+  },
 })
 
 const TextInputOutline = (props) => {
