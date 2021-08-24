@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import PropTypes from "prop-types";
@@ -33,6 +33,10 @@ const TextInputOutline = (props) => {
       onChange={props.onChange}
       variant="outlined"
       className={classes.textField}
+      inputProps={props.inputProps}
+      inputRef={props.inputRef}
+      helperText={props.inputRef?.current?.validationMessage}
+      error={props.inputError}
     />
   )
 }
@@ -45,7 +49,10 @@ TextInputOutline.propTypes = {
   rows: PropTypes.number,
   value: PropTypes.string,
   type: PropTypes.string,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
+  inputProps: PropTypes.object,
+  inputRef: PropTypes.object,
+  inputError: PropTypes.bool
 }
 
 export default TextInputOutline;
