@@ -1,6 +1,7 @@
 import React, { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
+import { push } from "connected-react-router";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
@@ -53,6 +54,14 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(1),
     fontFamily: "initial",
   },
+  signupGuide: {
+    cursor: "pointer",
+    fontSize: "1rem",
+    color: "#7597c1",
+    "&:hover": {
+      textDecoration: "underline"
+    }
+  }
 }))
 
 const SignIn = () => {
@@ -98,6 +107,7 @@ const SignIn = () => {
           >
             Sign In
           </Button>
+          <p className={classes.signupGuide} onClick={() => dispatch(push("/signup"))}>アカウントをお持ちでない方はこちら</p>
         </div>
       </Typography>
       </Container>
