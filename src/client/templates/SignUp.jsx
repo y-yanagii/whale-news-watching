@@ -9,6 +9,11 @@ import Whale from "../assets/img/src/whale-sm.jpg";
 import { TextInputOutline } from "../components/Uikit";
 import Button from "@material-ui/core/Button";
 import DoubleArrowIcon from "@material-ui/icons/DoubleArrow";
+import IconButton from "@material-ui/core/IconButton";
+import CloseIcon from "@material-ui/icons/Close";
+import Collapse from "@material-ui/core/Collapse";
+import MuiAlert from "@material-ui/lab/Alert";
+import { signUp } from "../reducks/users/operations";
 
 const useStyles = makeStyles((theme) => ({
   // 背景画像設定
@@ -40,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
     width: "350px",
     border: "solid 1px #7597c1",
     borderRadius: "5px",
-    margin: "10% 1.5% -2% 1%",
+    margin: "150px 1.5% -2% 1%",
     padding: "16px",
     backgroundColor: "black"
   },
@@ -62,8 +67,11 @@ const useStyles = makeStyles((theme) => ({
     "&:hover": {
       textDecoration: "underline"
     }
+  },
+  snackBar: {
+    backgroundColor: "rgb(211, 47, 47)"
   }
-}))
+}));
 
 const SignUp = () => {
   const classes = useStyles();
@@ -118,6 +126,38 @@ const SignUp = () => {
     }
   };
 
+  // reduxのユーザ登録処理呼び出し
+  const createUser = () => {
+    // パスワードと確認用パスワードの一致であることのバリデーションチェック
+    if (password !== passwordConfirmation) {
+      setOpen(true); // パスワード不一致アラートを表示
+      return false;
+    }
+
+    // 入力項目のバリデーションチェック
+    handleChange(inputNameRef, setInputErrorName);
+    handleChange(inputEmailRef, setInputErrorEmail);
+    handleChange(inputPasswordRef, setInputErrorPassword);
+    handleChange(inputPasswordConfirmationRef, setInputErrorPasswordConfirmation);
+
+    if (!inputNameRef.current.validity.valid
+      || !inputEmailRef.current.validity.valid
+      || !inputPasswordRef.current.validity.valid
+      || !inputPasswordConfirmationRef.current.validity.valid) { 
+        // 一つでもバリデーションチェックに引っかかる場合処理を止める
+        return false;
+    }
+
+    // ユーザ登録処理
+    dispatch(signUp(name, email, password, passwordConfirmation));
+  };
+
+  // パスワード確認との不一致用アラート
+  const [open, setOpen] = useState(false);
+  const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
+
   return (
     <>
       <CssBaseline />
@@ -127,6 +167,28 @@ const SignUp = () => {
           <div>
             <h2 className={classes.title}>Sign Up</h2>
           </div>
+          {/* アラート表示 */}
+          <Collapse in={open}>
+            <Alert
+              severity="error"
+              action={
+                <IconButton
+                  aria-label="close"
+                  color="inherit"
+                  size="small"
+                  onClick={() => {
+                    setOpen(false);
+                  }}
+                >
+                  <CloseIcon fontSize="inherit" />
+                </IconButton>
+              }
+            >
+              パスワードと確認用パスワードが一致しません!
+            </Alert>
+          </Collapse>
+          <div className="module-spacer--small" />
+
           <TextInputOutline
             fullWidth={true} label={"Name"} multiline={false} required={true}
             rows={1} value={name} type={"name"} onChange={inputName} inputProps={{ maxLength: 30, required: true }}
@@ -152,6 +214,7 @@ const SignUp = () => {
             color="primary"
             className={classes.button}
             endIcon={<DoubleArrowIcon />}
+            onClick={() => createUser()}
           >
             Sign Up
           </Button>
