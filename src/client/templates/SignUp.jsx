@@ -74,10 +74,11 @@ const SignUp = () => {
         [email, setEmail] = useState(""),
         [password, setPassword] = useState(""),
         [passwordConfirmation, setPasswordConfirmation] = useState("");
-        const [inputErrorName, setInputErrorName] = useState(false),
-              [inputErrorEmail, setInputErrorEmail] = useState(false),
-              [inputErrorPassword, setInputErrorPassword] = useState(false),
-              [inputErrorPasswordConfirmation, setInputErrorPasswordConfirmation] = useState(false);
+
+  const [inputErrorName, setInputErrorName] = useState(false),
+        [inputErrorEmail, setInputErrorEmail] = useState(false),
+        [inputErrorPassword, setInputErrorPassword] = useState(false),
+        [inputErrorPasswordConfirmation, setInputErrorPasswordConfirmation] = useState(false);
 
   const inputNameRef = useRef(null);
   const inputEmailRef = useRef(null);
