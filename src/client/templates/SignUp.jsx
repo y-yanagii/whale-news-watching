@@ -1,6 +1,7 @@
 import React, { useRef, useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
+import { push } from "connected-react-router";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
@@ -38,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
     color: "#f3f9f9",
     width: "350px",
     border: "solid 1px #7597c1",
-    margin: "5% 1.5% -2% 1%",
+    margin: "10% 1.5% -2% 1%",
     padding: "16px",
     backgroundColor: "black"
   },
@@ -53,6 +54,14 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(1),
     fontFamily: "initial",
   },
+  signinGuide: {
+    cursor: "pointer",
+    fontSize: "1rem",
+    color: "#7597c1",
+    "&:hover": {
+      textDecoration: "underline"
+    }
+  }
 }))
 
 const SignUp = () => {
@@ -141,10 +150,10 @@ const SignUp = () => {
             color="primary"
             className={classes.button}
             endIcon={<DoubleArrowIcon />}
-            href={"/articles"}
           >
             Sign Up
           </Button>
+          <p className={classes.signinGuide} onClick={() => dispatch(push("/signin"))}>アカウントをお持ちの方はこちら</p>
         </div>
       </Typography>
       </Container>
