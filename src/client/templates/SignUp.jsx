@@ -127,9 +127,10 @@ const SignUp = () => {
   };
 
   // reduxのユーザ登録処理呼び出し
-  const createUser = () => {
+  const createUser = async () => {
     // パスワードと確認用パスワードの一致であることのバリデーションチェック
     if (password !== passwordConfirmation) {
+      setOpenMsg("パスワードと確認用パスワードが一致しません!");
       setOpen(true); // パスワード不一致アラートを表示
       return false;
     }
@@ -149,11 +150,18 @@ const SignUp = () => {
     }
 
     // ユーザ登録処理
-    dispatch(signUp(name, email, password, passwordConfirmation));
+    const res = await dispatch(signUp(name, email, password, passwordConfirmation));
+debugger;
+    if (typeof res !== "undefined" && res.status === 400) {
+      setOpen(true);
+      setOpenMsg(res.msg);
+      return false;
+    }
   };
 
-  // パスワード確認との不一致用アラート
+  // BadRequestやパスワード確認との不一致用アラート
   const [open, setOpen] = useState(false);
+  const [openMsg, setOpenMsg] = useState("");
   const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
   });
@@ -184,7 +192,7 @@ const SignUp = () => {
                 </IconButton>
               }
             >
-              パスワードと確認用パスワードが一致しません!
+              {openMsg}
             </Alert>
           </Collapse>
           <div className="module-spacer--small" />

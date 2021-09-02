@@ -1,4 +1,5 @@
 // operationsはredux-thunkで非同期処理を制御する
+import { setErrorMessageAction } from "./actions";
 import { push } from "connected-react-router";
 
 // ユーザ登録処理
@@ -17,16 +18,30 @@ export const signUp = (name, email, password, passwordConfirmation) => {
         password: password,
         passwordConfirmation: passwordConfirmation
       })
-    }).then((res) => {
+    }).then(async (res) => {
+      console.log("operationsのres");
+      const resData = await res.json();
+      console.log(resData);
+      console.log(res.status);
+      if (res.status === 500) {
+        // サーバエラー画面に遷移
+        dispatch(push("/error"));
+        throw new Error(`${res.status} ${res.statusText}`);
+      } else if (res.status === 400) {
+        // Emailの重複チェックのエラー
+        // エラーメッセージを保存
+        dispatch(setErrorMessageAction({
+          errorMessages: [resData.msg]
+        }));
+        return false;
+      }
       if (!res.ok) {
         throw new Error(`${res.status} ${res.statusText}`);
       }
-      return res.blob();
-    }).then((blob) => {
-      console.log(blob);
       dispatch(push("/"));
     }).catch((err) => {
-      throw err;
+      dispatch(push("/error"));
+      throw new Error(err);
     })
   }
 }

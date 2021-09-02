@@ -4,8 +4,9 @@ const initialState = {
   users: {
     isSignedIn: false,
     uid: "",
-    username: ""
-  }
+    username: "",
+    errorMessages: []
+  },
 };
 
 export default initialState;
