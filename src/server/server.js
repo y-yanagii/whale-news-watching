@@ -12,10 +12,15 @@ const serverConfig = config.get("server");
 
 app.use(express.static(path.resolve("./", "dist")));
 
+// post通信を扱うためのミドルウェアの設定
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 // api用のrouter読み込み(即時関数)
 app.use("/api", (() => {
   let router = express.Router();
   router.use("/articles", require("./api/articles.js")); // 記事情報関連API
+  router.use("/users", require("./api/users.js")); // ユーザ情報関連API
   // router.use("/sample", require("./api/sample.js")); // テストデータ作成
   return router;
 })());

@@ -8,8 +8,8 @@ import { makeStyles } from "@material-ui/styles";
 
 const useStyles = makeStyles({
   icon: {
-    color: "#7597c1"
-  }
+    color: "#7597c1",
+  },
 });
 
 const HeaderMenus = () => {
@@ -21,7 +21,7 @@ const HeaderMenus = () => {
       <IconButton className={classes.icon} onClick={() => dispatch(push("/favarites"))}>
         <FavoriteBorderIcon />
       </IconButton>
-      <IconButton className={classes.icon} onClick={() => console.log("お気に入り画面へ遷移")}>
+      <IconButton className={classes.icon} onClick={() => dispatch(push("/signin"))}>
         <AccountCircleIcon />
       </IconButton>
     </>
