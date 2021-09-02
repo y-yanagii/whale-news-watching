@@ -1,5 +1,5 @@
 import React, { useRef, useCallback, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import { push } from "connected-react-router";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -14,7 +14,6 @@ import CloseIcon from "@material-ui/icons/Close";
 import Collapse from "@material-ui/core/Collapse";
 import MuiAlert from "@material-ui/lab/Alert";
 import { signUp } from "../reducks/users/operations";
-import { getErrorMessages } from "../reducks/users/selectors";
 
 const useStyles = makeStyles((theme) => ({
   // 背景画像設定
@@ -76,7 +75,6 @@ const useStyles = makeStyles((theme) => ({
 
 const SignUp = () => {
   const classes = useStyles();
-  const selector = useSelector(state => state);
   const dispatch = useDispatch();
 
   const [name, setName] = useState(""),
@@ -180,6 +178,7 @@ const SignUp = () => {
       }
       // ログイン状態の保持
       dispatch(signUp(name, email));
+      // 一覧情報に遷移
       dispatch(push("/"));
     }).catch((err) => {
       dispatch(push("/error"));
