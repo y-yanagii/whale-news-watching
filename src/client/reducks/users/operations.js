@@ -6,6 +6,16 @@ import { push } from "connected-react-router";
 export const signUp = (name, email) => {
   // 第一引数にdispatchメソッド、第二引数に現在のstate情報が入ってくる
   return async (dispatch) => {
+    // ログイン情報を保持
+    dispatch(signInAction({name: name, email: email}))
+  }
+}
+
+// ログイン処理
+export const signIn = (name, email) => {
+  // 第一引数にdispatchメソッド、第二引数に現在のstate情報が入ってくる
+  return async (dispatch) => {
+    // ログイン情報を保持
     dispatch(signInAction({name: name, email: email}))
   }
 }
