@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useRef, useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import { push } from "connected-react-router";
@@ -71,15 +71,40 @@ const SignIn = () => {
 
   const [email, setEmail] = useState(""),
         [password, setPassword] = useState("");
+
+  const [inputErrorEmail, setInputErrorEmail] = useState(false),
+        [inputErrorPassword, setInputErrorPassword] = useState(false);
+
+  const inputEmailRef = useRef(null);
+  const inputPasswordRef = useRef(null);
   
   // useCallback
   const inputEmail = useCallback((event) => {
     setEmail(event.target.value);
+    handleChange(inputEmailRef, setInputErrorEmail);
   }, [setEmail]);
 
   const inputPassword = useCallback((event) => {
     setPassword(event.target.value);
+    handleChange(inputPasswordRef, setInputErrorPassword);
   }, [setPassword]);
+
+  // バリデーションチェック
+  const handleChange = (inputRef, setInputError) => {
+    if (inputRef.current) {
+      const ref = inputRef.current;
+      if  (!ref.validity.valid) {
+        setInputError(true);
+      } else {
+        setInputError(false);
+      }
+    }
+  }
+
+  // ログイン処理
+  const login = async () => {
+    
+  }
 
   return (
     <>
@@ -93,17 +118,19 @@ const SignIn = () => {
           <TextInputOutline
             fullWidth={true} label={"Email"} multiline={false} required={true}
             rows={1} value={email} type={"email"} onChange={inputEmail}
+            inputProps={{ required: true }} inputError={inputErrorEmail}
           />
           <TextInputOutline
             fullWidth={true} label={"password"} multiline={false} required={true}
             rows={1} value={password} type={"password"} onChange={inputPassword}
+            inputProps={{ required: true }} inputError={inputErrorPassword}
           />
           <Button
             variant="contained"
             color="primary"
             className={classes.button}
             endIcon={<DoubleArrowIcon />}
-            href={"/articles"}
+            onClick={() => login()}
           >
             Sign In
           </Button>
