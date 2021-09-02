@@ -1,5 +1,5 @@
 import React, { useRef, useCallback, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import { push } from "connected-react-router";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -14,6 +14,7 @@ import CloseIcon from "@material-ui/icons/Close";
 import Collapse from "@material-ui/core/Collapse";
 import MuiAlert from "@material-ui/lab/Alert";
 import { signUp } from "../reducks/users/operations";
+import { getErrorMessages } from "../reducks/users/selectors";
 
 const useStyles = makeStyles((theme) => ({
   // 背景画像設定
@@ -75,7 +76,7 @@ const useStyles = makeStyles((theme) => ({
 
 const SignUp = () => {
   const classes = useStyles();
-
+  const selector = useSelector(state => state);
   const dispatch = useDispatch();
 
   const [name, setName] = useState(""),
@@ -150,13 +151,40 @@ const SignUp = () => {
     }
 
     // ユーザ登録処理
-    const res = await dispatch(signUp(name, email, password, passwordConfirmation));
-debugger;
-    if (typeof res !== "undefined" && res.status === 400) {
-      setOpen(true);
-      setOpenMsg(res.msg);
-      return false;
-    }
+    const url = "/api/users/regist";
+    fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        name: name,
+        email: email,
+        password: password,
+        passwordConfirmation: passwordConfirmation
+      })
+    }).then(async (res) => {
+      const resData = await res.json();
+      if (res.status === 500) {
+        // サーバエラー画面に遷移
+        dispatch(push("/error"));
+        throw new Error(`${res.status} ${res.statusText}`);
+      } else if (res.status === 400) {
+        // Emailの重複チェックのエラー
+        setOpen(true);
+        setOpenMsg(resData.msg);
+        return false;
+      }
+      if (!res.ok) {
+        throw new Error(`${res.status} ${res.statusText}`);
+      }
+      // ログイン状態の保持
+      dispatch(signUp(name, email));
+      dispatch(push("/"));
+    }).catch((err) => {
+      dispatch(push("/error"));
+      throw new Error(err);
+    })
   };
 
   // BadRequestやパスワード確認との不一致用アラート

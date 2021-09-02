@@ -43,10 +43,8 @@ router.post("/regist", registrationValidationRules, (req, res) => {
       // ユーザ情報の重複チェック
       if (users.rows.length > 0) {
         await client.query("ROLLBACK"); // DB変更を元に戻す
-        client.release();
         // BadRequestとメッセージを返す
         const data = { msg: "既に登録されているメールアドレスです" };
-        console.log("fjiejfoiewjiof");
         return res.status(400).json(data);
       }
 

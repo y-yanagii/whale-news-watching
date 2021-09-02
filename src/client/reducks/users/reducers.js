@@ -3,10 +3,10 @@ import initialState from "../store/initialState";
 
 export const UsersReducer = (state = initialState.users, action) => {
   switch (action.type) {
-    case Actions.SET_ERROR_MESSAGE:
+    case Actions.SET_LOGIN_INFO:
       return {
         ...state,
-        errorMessages: [...action.payload.errorMessages]
+        ...action.payload
       }
     default:
       return state
