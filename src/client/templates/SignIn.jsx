@@ -103,7 +103,34 @@ const SignIn = () => {
 
   // ログイン処理
   const login = async () => {
-    
+    // 入力項目のバリデーションチェック
+    handleChange(inputEmailRef, setInputErrorEmail);
+    handleChange(inputPasswordRef, setInputErrorPassword);
+
+    if (!inputEmailRef.current.validity.valid || !inputPasswordRef.current.validity.valid) {
+      // 一つでもバリデーションチェックに引っかかる場合処理を止める
+      return false;
+    }
+
+    // ログイン処理
+    const url = "/api/users/login";
+    fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        email: email,
+        password: password
+      })
+    }).then(async (res) => {
+      const resData = await res.json();
+      console.log(resData);
+      console.log(res);
+      if (res.ok) {
+        // ログイン情報を保持する
+      }
+    })
   }
 
   return (
@@ -117,13 +144,13 @@ const SignIn = () => {
           </div>
           <TextInputOutline
             fullWidth={true} label={"Email"} multiline={false} required={true}
-            rows={1} value={email} type={"email"} onChange={inputEmail}
-            inputProps={{ required: true }} inputError={inputErrorEmail}
+            rows={1} value={email} type={"email"} onChange={inputEmail} inputProps={{ required: true }}
+            inputRef={inputEmailRef} inputError={inputErrorEmail}
           />
           <TextInputOutline
             fullWidth={true} label={"password"} multiline={false} required={true}
-            rows={1} value={password} type={"password"} onChange={inputPassword}
-            inputProps={{ required: true }} inputError={inputErrorPassword}
+            rows={1} value={password} type={"password"} onChange={inputPassword} inputProps={{ required: true }}
+            inputRef={inputPasswordRef} inputError={inputErrorPassword}
           />
           <Button
             variant="contained"
