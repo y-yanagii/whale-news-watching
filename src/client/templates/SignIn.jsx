@@ -9,6 +9,11 @@ import Whale from "../assets/img/src/whale-sm.jpg";
 import { TextInputOutline } from "../components/Uikit";
 import Button from "@material-ui/core/Button";
 import DoubleArrowIcon from "@material-ui/icons/DoubleArrow";
+import { signIn } from "../reducks/users/operations";
+import Collapse from "@material-ui/core/Collapse";
+import MuiAlert from "@material-ui/lab/Alert";
+import CloseIcon from "@material-ui/icons/Close";
+import { IconButton } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   // 背景画像設定
@@ -77,6 +82,12 @@ const SignIn = () => {
 
   const inputEmailRef = useRef(null);
   const inputPasswordRef = useRef(null);
+
+  const [open, setOpen] = useState(false);
+  const [openMsg, setOpenMsg] = useState("");
+  const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />
+  });
   
   // useCallback
   const inputEmail = useCallback((event) => {
@@ -125,12 +136,20 @@ const SignIn = () => {
       })
     }).then(async (res) => {
       const resData = await res.json();
-      console.log(resData);
-      console.log(res);
       if (res.ok) {
         // ログイン情報を保持する
+        dispatch(signIn(resData.name, resData.email));
+      } else if (res.status === 400) {
+        // ログインに失敗した旨をフラッシュメッセージで表示
+        setOpen(true);
+        setOpenMsg(resData.msg);
+      } else if (res.status === 500) {
+        // サーバエラー画面に遷移
+        throw new Error(`${res.status} ${res.statusText}`);
       }
-    })
+    }).catch((err) => {
+      throw new Error(err);
+    });
   }
 
   return (
@@ -142,6 +161,28 @@ const SignIn = () => {
           <div>
             <h2 className={classes.title}>Sign In</h2>
           </div>
+          {/* アラート表示 */}
+          <Collapse in={open}>
+            <Alert
+              severity="error"
+              action={
+                <IconButton
+                  aria-label="close"
+                  color="inherit"
+                  size="small"
+                  onClick={() => {
+                    setOpen(false);
+                  }}
+                >
+                  <CloseIcon fontSize="inherit" />
+                </IconButton>
+              }
+            >
+              {openMsg}
+            </Alert>
+          </Collapse>
+          <div className="module-spacer--small" />
+
           <TextInputOutline
             fullWidth={true} label={"Email"} multiline={false} required={true}
             rows={1} value={email} type={"email"} onChange={inputEmail} inputProps={{ required: true }}
