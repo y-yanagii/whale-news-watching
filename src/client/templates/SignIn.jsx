@@ -156,55 +156,55 @@ const SignIn = () => {
     <>
       <CssBaseline />
       <Container maxWidth="xl" className={classes.backImage}>
-      <Typography component="div">
-        <div className={classes.catchphrase}>
-          <div>
-            <h2 className={classes.title}>Sign In</h2>
-          </div>
-          {/* アラート表示 */}
-          <Collapse in={open}>
-            <Alert
-              severity="error"
-              action={
-                <IconButton
-                  aria-label="close"
-                  color="inherit"
-                  size="small"
-                  onClick={() => {
-                    setOpen(false);
-                  }}
-                >
-                  <CloseIcon fontSize="inherit" />
-                </IconButton>
-              }
-            >
-              {openMsg}
-            </Alert>
-          </Collapse>
-          <div className="module-spacer--small" />
+        <Typography component="div">
+          <div className={classes.catchphrase}>
+            <div>
+              <h2 className={classes.title}>Sign In</h2>
+            </div>
+            {/* アラート表示 */}
+            <Collapse in={open}>
+              <Alert
+                severity="error"
+                action={
+                  <IconButton
+                    aria-label="close"
+                    color="inherit"
+                    size="small"
+                    onClick={() => {
+                      setOpen(false);
+                    }}
+                  >
+                    <CloseIcon fontSize="inherit" />
+                  </IconButton>
+                }
+              >
+                {openMsg}
+              </Alert>
+            </Collapse>
+            <div className="module-spacer--small" />
 
-          <TextInputOutline
-            fullWidth={true} label={"Email"} multiline={false} required={true}
-            rows={1} value={email} type={"email"} onChange={inputEmail} inputProps={{ required: true }}
-            inputRef={inputEmailRef} inputError={inputErrorEmail}
-          />
-          <TextInputOutline
-            fullWidth={true} label={"password"} multiline={false} required={true}
-            rows={1} value={password} type={"password"} onChange={inputPassword} inputProps={{ required: true }}
-            inputRef={inputPasswordRef} inputError={inputErrorPassword}
-          />
-          <Button
-            variant="contained"
-            color="primary"
-            className={classes.button}
-            endIcon={<DoubleArrowIcon />}
-            onClick={() => login()}
-          >
-            Sign In
-          </Button>
-          <p className={classes.signupGuide} onClick={() => dispatch(push("/signup"))}>アカウントをお持ちでない方はこちら</p>
-        </div>
-      </Typography>
+            <TextInputOutline
+              fullWidth={true} label={"Email"} multiline={false} required={true}
+              rows={1} value={email} type={"email"} onChange={inputEmail} inputProps={{ required: true }}
+              inputRef={inputEmailRef} inputError={inputErrorEmail}
+            />
+            <TextInputOutline
+              fullWidth={true} label={"password"} multiline={false} required={true}
+              rows={1} value={password} type={"password"} onChange={inputPassword} inputProps={{ required: true }}
+              inputRef={inputPasswordRef} inputError={inputErrorPassword}
+            />
+            <Button
+              variant="contained"
+              color="primary"
+              className={classes.button}
+              endIcon={<DoubleArrowIcon />}
+              onClick={() => login()}
+            >
+              Sign In
+            </Button>
+            <p className={classes.signupGuide} onClick={() => dispatch(push("/signup"))}>アカウントをお持ちでない方はこちら</p>
+          </div>
+        </Typography>
       </Container>
     </>
   );
