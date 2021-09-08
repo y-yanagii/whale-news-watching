@@ -2,6 +2,7 @@ import express from "express";
 import path from "path";
 import config from "config";
 import { logger } from "./logger";
+import passport from "passport";
 import NewsAPI from "newsapi";
 
 const app = express();
@@ -11,6 +12,9 @@ const app = express();
 const serverConfig = config.get("server");
 
 app.use(express.static(path.resolve("./", "dist")));
+
+// 認証ミドルウェアの設定
+app.use(passport.initialize());
 
 // post通信を扱うためのミドルウェアの設定
 app.use(express.json());

@@ -5,7 +5,7 @@ let router = require("express").Router();
 
 // ユーザ登録のバリデーションチェック・ルール
 const registrationValidationRules = [
-  check("name").not().isEmpty().withMessage("ユーザ名を入力してください"),
+  check("username").not().isEmpty().withMessage("ユーザ名を入力してください"),
   check("email").not().isEmpty().withMessage("メールアドレスを入力してください"),
   check("password").not().isEmpty().withMessage("パスワードを入力してください")
                     .isLength({ min: 6 }).withMessage("6文字以上入力してください")
@@ -27,7 +27,7 @@ router.post("/regist", registrationValidationRules, (req, res) => {
     return res.status(500).json(errors.array());
   }
 
-  const name = req.body.name;
+  const username = req.body.username;
   const email = req.body.email;
   const hashedPassword = bcrypt.hashSync(req.body.password, 10); // パスワードのハッシュ化
 
@@ -49,7 +49,7 @@ router.post("/regist", registrationValidationRules, (req, res) => {
       }
 
       // ユーザ登録
-      await client.query("INSERT INTO users (name, email, crypted_password) VALUES ($1, $2, $3)", [name, email, hashedPassword]);
+      await client.query("INSERT INTO users (name, email, crypted_password) VALUES ($1, $2, $3)", [username, email, hashedPassword]);
       // DB反映
       await client.query("COMMIT");
 
