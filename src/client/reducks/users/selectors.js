@@ -15,4 +15,4 @@ export const getUserName = createSelector(
 export const getIsSignedIn = createSelector(
   [usersSelector],
   state => state.isSignedIn
-)
+);

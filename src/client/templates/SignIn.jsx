@@ -131,11 +131,12 @@ const SignIn = () => {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        email: email,
+        username: email,
         password: password
       })
     }).then(async (res) => {
       const resData = await res.json();
+      console.log(resData);
       if (res.ok) {
         // ログイン情報を保持する
         dispatch(signIn(resData.username, resData.email));
@@ -148,7 +149,8 @@ const SignIn = () => {
         throw new Error(`${res.status} ${res.statusText}`);
       }
     }).catch((err) => {
-      throw new Error(err);
+      console.log(err);
+      throw err;
     });
   }
 

@@ -8,7 +8,7 @@ passport.serializeUser((email, done) => {
 
 passport.deserializeUser((email, done) => {
   // でシリアライズはクライアント側から戻ってくる場合emailが入ってくる
-
+  
 });
 
 initialize = function() {

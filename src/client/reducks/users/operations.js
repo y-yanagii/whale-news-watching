@@ -16,9 +16,9 @@ export const signIn = (username, email) => {
   // 第一引数にdispatchメソッド、第二引数に現在のstate情報が入ってくる
   return async (dispatch) => {
     // ログイン情報を保持
-    dispatch(signInAction({username: username, email: email}));
+    await dispatch(signInAction({username: username, email: email}));
     // 一覧画面に遷移
-    dispatch(push("/articles"));
+    await dispatch(push("/articles"));
   }
 }
 
