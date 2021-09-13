@@ -121,17 +121,16 @@ router.post("/login", loginValidationRules, (req, res, next) => {
   }
   // next();
   passport.authenticate("local", (err, user, info) => {
-    console.log("---------------------------------------------");
-    console.log(res);
+    // ログイン成功か失敗をフロントに返す
     console.log(user);
-    console.log(info);
-    console.log("---------------------------------------------");
-
-    return false;
-  })(req, res, next);
+    res.status(info.status).json({
+      user: user,
+      msg: info.message
+    });
+  })(req, res, next); // authenticateの関数の中でm大枠の引数が扱える
 });
 
-// ユーザログイン処理
+// // ユーザログイン処理
 // router.post("/login", loginValidationRules, (req, res, next) => {
 //   // 入力チェック
 //   const errors = validationResult(req);
@@ -143,6 +142,7 @@ router.post("/login", loginValidationRules, (req, res, next) => {
 // }, passport.authenticate("local", (err, user, info) => {
 //   // 認証結果
 //   // ここのuserの中身でログイン処理成功失敗を画面側に返す
+  
 //   console.log(err);
 //   console.log("errorerrorerrorerrorerrorerrorerrorerrorerrorerrorerrorerrorerrorerror");
 //   console.log(res);

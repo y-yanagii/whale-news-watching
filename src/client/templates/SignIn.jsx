@@ -139,7 +139,7 @@ const SignIn = () => {
       console.log(resData);
       if (res.ok) {
         // ログイン情報を保持する
-        dispatch(signIn(resData.username, resData.email));
+        dispatch(signIn(resData.user.name, resData.user.email));
       } else if (res.status === 400) {
         // ログインに失敗した旨をフラッシュメッセージで表示
         setOpen(true);
