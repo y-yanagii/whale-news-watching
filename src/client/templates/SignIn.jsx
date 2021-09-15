@@ -124,7 +124,7 @@ const SignIn = () => {
     }
 
     // ログイン処理
-    const url = "/api/users/login";
+    const url = "api/users/login";
     fetch(url, {
       method: "POST",
       headers: {

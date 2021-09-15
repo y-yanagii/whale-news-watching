@@ -19,7 +19,7 @@ const ArticleDetail = () => {
   useEffect(() => {
     console.log("useEffect");
     // 記事情報取得
-    fetch("/api/articles/" + id)
+    fetch("/api/articles/" + "1")
     .then(res => res.json())
     .then((data) => {
       setArticle(data);

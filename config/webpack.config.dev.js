@@ -16,7 +16,7 @@ module.exports = merge(webpackConfig, {
     host: "localhost",
     port: 8080,
     proxy: {
-      "/api/**": {
+      "/api": {
         target: "http://localhost:3000",
         secure: false,
         logLevel: "debug"
