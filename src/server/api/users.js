@@ -106,6 +106,9 @@ passport.use("local",
         return done(null, false, {status: 400, message: "ログインに失敗しました。"});
       }
     })().catch(err => {
+      console.log("errerrerrerrerrerrerrerrerrerrerrerrerrerrerrerrerrerrerrerrerr");
+      console.log(err);
+      console.log("errerrerrerrerrerrerrerrerrerrerrerrerrerrerrerrerrerrerrerrerrerr");
       throw err;
     });
   })
@@ -124,7 +127,8 @@ router.post("/login", loginValidationRules, (req, res, next) => {
     // ログイン成功か失敗をフロントに返す
     console.log(user);
     res.status(info.status).json({
-      user: user,
+      username: user.name,
+      email: user.email,
       msg: info.message
     });
   })(req, res, next); // authenticateの関数の中でm大枠の引数が扱える

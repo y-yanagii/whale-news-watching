@@ -1,9 +1,11 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/styles";
 import AppBar from "@material-ui/core/AppBar";
 import ToolBar from "@material-ui/core/ToolBar";
 import logo from "../../assets/img/icons/logo.png";
 import { HeaderMenus, HeaderTabs, HeaderSearch } from "./index";
+import { getIsSignedIn } from "../../reducks/users/selectors";
 
 const useStyles = makeStyles({
   root: {
@@ -32,8 +34,8 @@ const useStyles = makeStyles({
 
 const Header = () => {
   const classes = useStyles();
-
-  const isSignedIn = true;
+  const selector = useSelector(state => state);
+  const isSignedIn = getIsSignedIn(selector);
 
   return (
     <div className={classes.root}>

@@ -19,8 +19,6 @@ app.use(passport.initialize());
 // post通信を扱うためのミドルウェアの設定
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-import bodyParser from "body-parser";
-app.use(bodyParser.urlencoded({ extended: true }));
 
 // api用のrouter読み込み(即時関数)
 app.use("/api", (() => {
