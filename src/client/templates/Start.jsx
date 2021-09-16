@@ -1,4 +1,7 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getIsSignedIn } from "../reducks/users/selectors";
+import { push } from "connected-react-router";
 import { makeStyles } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Typography from "@material-ui/core/Typography";
@@ -59,6 +62,20 @@ const useStyles = makeStyles((theme) => ({
 
 const Start = () => {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const selector = useSelector(state => state);
+  const isSignedIn = getIsSignedIn(selector);
+
+  // 記事一覧orログイン画面へ遷移
+  const whaleWatching = () => {
+    if (isSignedIn) {
+      // ログイン済みの場合記事情報画面へ遷移
+      dispatch(push("/articles"));
+    } else {
+      // ログイン前の場合ログイン画面へ遷移
+      dispatch(push("/signin"));
+    }
+  }
 
   return (
     <>
@@ -74,7 +91,7 @@ const Start = () => {
               color="primary"
               className={classes.button}
               endIcon={<SearchIcon />}
-              href={"/articles"}
+              onClick={() => whaleWatching()}
             >
               Whale Watching Start
             </Button>

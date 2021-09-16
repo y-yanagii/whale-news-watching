@@ -5,7 +5,10 @@ import AppBar from "@material-ui/core/AppBar";
 import ToolBar from "@material-ui/core/ToolBar";
 import logo from "../../assets/img/icons/logo.png";
 import { HeaderMenus, HeaderTabs, HeaderSearch } from "./index";
+import IconButton from "@material-ui/core/IconButton";
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import { getIsSignedIn } from "../../reducks/users/selectors";
+import { push } from "connected-react-router";
 
 const useStyles = makeStyles({
   root: {
@@ -29,13 +32,17 @@ const useStyles = makeStyles({
   },
   iconButtons: {
     margin: "0 3% 0 auto"
-  }
+  },
+  loginIcon: {
+    color: "#7597c1",
+  },
 });
 
 const Header = () => {
   const classes = useStyles();
   const selector = useSelector(state => state);
   const isSignedIn = getIsSignedIn(selector);
+  const dispatch = useDispatch();
 
   return (
     <div className={classes.root}>
@@ -51,11 +58,16 @@ const Header = () => {
           <div className={classes.tabs}>
             <HeaderTabs />
           </div>
-          {isSignedIn && (
             <div className={classes.iconButtons}>
-              <HeaderMenus />
+              {isSignedIn && (
+                <HeaderMenus />
+              )}
+              {!isSignedIn && (
+                <IconButton className={classes.loginIcon} onClick={() => dispatch(push("/signin"))}>
+                  <AccountCircleIcon />
+                </IconButton>
+              )}
             </div>
-          )}
         </ToolBar>
       </AppBar>
     </div>

@@ -9,11 +9,11 @@ const Router = () => {
   // Routerで正規表現()?で囲んだ文字列はあってもなくてもマッチ:idは変数扱い
   return (
     <Switch>
+      <Route exact path={"(/)?"} component={Start} />
       <Route exact path={"/signin"} component={SignIn} />
       <Route exact path={"/signup"} component={SignUp} />
 
       <Auth>
-        <Route exact path={"(/)?"} component={Start} />
         <Route exact path={"/articles"} component={Articles} />
         <Route exact path={"/articles/:id?"} component={ArticleDetail} />
         <Route exact path={"/favarites"} component={Favorites} />

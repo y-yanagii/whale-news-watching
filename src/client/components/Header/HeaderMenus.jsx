@@ -3,8 +3,9 @@ import { useDispatch } from "react-redux";
 import { push } from "connected-react-router";
 import IconButton from "@material-ui/core/IconButton";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
-import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import MeetingRoomIcon from "@material-ui/icons/MeetingRoom";
 import { makeStyles } from "@material-ui/styles";
+import { signOut } from "../../reducks/users/operations";
 
 const useStyles = makeStyles({
   icon: {
@@ -21,8 +22,8 @@ const HeaderMenus = () => {
       <IconButton className={classes.icon} onClick={() => dispatch(push("/favarites"))}>
         <FavoriteBorderIcon />
       </IconButton>
-      <IconButton className={classes.icon} onClick={() => dispatch(push("/signin"))}>
-        <AccountCircleIcon />
+      <IconButton className={classes.icon} onClick={() => dispatch(signOut())}>
+        <MeetingRoomIcon />
       </IconButton>
     </>
   )

@@ -1,5 +1,5 @@
 // operationsはredux-thunkで非同期処理を制御する
-import { signInAction } from "./actions";
+import { signInAction, signOutAction } from "./actions";
 import { push } from "connected-react-router";
 
 // ユーザ登録処理
@@ -26,5 +26,14 @@ export const signIn = (username, email) => {
 export const listenAuthState = () => {
   return async (dispatch) => {
 
+  }
+}
+
+// ログアウト処理
+export const signOut = () => {
+  return async (dispatch) => {
+    dispatch(signOutAction());
+    // トップページに遷移
+    dispatch(push("/"));
   }
 }
