@@ -4,6 +4,7 @@ import config from "config";
 import { logger } from "./logger";
 import passport from "passport";
 import accountcontrol from "./lib/accountcontrol";
+import session from "express-session";
 import NewsAPI from "newsapi";
 
 const app = express();
@@ -21,6 +22,16 @@ app.use(...accountcontrol.initialize()); // ...記法。（initializeは配列�
 // post通信を扱うためのミドルウェアの設定
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// セッション
+app.use(session({
+  secret: "keyboard cat",
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    maxAge: 1000 * 60 * 60 * 24 * 30,
+  }
+}));
 
 // api用のrouter読み込み(即時関数)
 app.use("/api", (() => {
