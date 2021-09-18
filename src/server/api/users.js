@@ -121,35 +121,49 @@ router.post("/login", loginValidationRules, (req, res, next) => {
   }
   // next();
   passport.authenticate("local", (err, user, info) => {
-    // ログイン成功か失敗をフロントに返す
-    console.log(user);
-    res.status(info.status).json({
-      username: user.name,
-      email: user.email,
-      msg: info.message
-    });
+    req.login(user, (err) => {
+      if (err) {
+        console.log("fjeijwfijiowejfijew");
+        return next(err)
+      }
+
+      if (req.isAuthenticated()) {
+        // 認証済みなら処理続行
+        console.log("認証済み認証済み認証済み認証済み");
+        next();
+      }
+      
+      // ログイン成功か失敗をフロントに返す
+      res.status(info.status).json({
+        username: user.name,
+        email: user.email,
+        msg: info.message
+      });
+    })
   })(req, res, next); // authenticateの関数の中でm大枠の引数が扱える
 });
 
 // ログアウト
 router.get("/logout", (req, res) => {
   req.logout();
-  res.status(200).send();
+  res.status(200).json({ msg: "ログアウトしました。" });
 });
 
 // 認証チェック
 router.get("/auth", checkAuthentication, (req, res) => {
-  return res.status(200).json(req.user);
+  res.status(200).json({ user: req.user });
 });
 
 // 認証状態を返す
 function checkAuthentication(req, res, next) {
   if (req.isAuthenticated()) {
     // 認証済みなら処理続行
+    console.log("認証済み認証済み認証済み認証済み");
     next();
   } else {
     // 認証していない場合No Contentを返し終了
-    res.status(204).send();
+    console.log("認証してない");
+    res.status(204).json({ msg: "ログインしてください。" });
   }
 }
 

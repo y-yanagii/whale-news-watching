@@ -1,14 +1,14 @@
 import passport from "passport";
 let initialize;
 
-passport.serializeUser((email, done) => {
+passport.serializeUser((user, done) => {
   // シリアライズはクライアント側にデータを返却
-  done(null, email);
+  done(null, user);
 });
 
-passport.deserializeUser((email, done) => {
-  // でシリアライズはクライアント側から戻ってくる場合emailが入ってくる
-  
+passport.deserializeUser((user, done) => {
+  // デシリアライズはクライアント側から戻ってくる場合userが入ってくる
+  done(null, user);
 });
 
 initialize = function() {
