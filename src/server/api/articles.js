@@ -19,6 +19,7 @@ router.get("/", (req, res) => {
 // 記事詳細情報取得
 router.get("/:id", (req, res) => {
   const id = req.params.id;
+  console.log("fjiejfiejif");
   pool.connect(function(err, client) {
     try {
       if (err) {
