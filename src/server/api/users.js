@@ -1,11 +1,14 @@
 import pool from "../postgresql";
 import bcrypt from "bcrypt"; // ハッシュ化
 import { check, validationResult } from "express-validator"; // バリデーション
+import passport from "passport";
+import { Strategy as LocalStrategy  } from "passport-local";
+import { json } from "express";
 let router = require("express").Router();
 
-// バリデーションチェック・ルール
+// ユーザ登録のバリデーションチェック・ルール
 const registrationValidationRules = [
-  check("name").not().isEmpty().withMessage("ユーザ名を入力してください"),
+  check("username").not().isEmpty().withMessage("ユーザ名を入力してください"),
   check("email").not().isEmpty().withMessage("メールアドレスを入力してください"),
   check("password").not().isEmpty().withMessage("パスワードを入力してください")
                     .isLength({ min: 6 }).withMessage("6文字以上入力してください")
@@ -27,7 +30,7 @@ router.post("/regist", registrationValidationRules, (req, res) => {
     return res.status(500).json(errors.array());
   }
 
-  const name = req.body.name;
+  const username = req.body.username;
   const email = req.body.email;
   const hashedPassword = bcrypt.hashSync(req.body.password, 10); // パスワードのハッシュ化
 
@@ -49,28 +52,176 @@ router.post("/regist", registrationValidationRules, (req, res) => {
       }
 
       // ユーザ登録
-      await client.query("INSERT INTO users (name, email, crypted_password) VALUES ($1, $2, $3)", [name, email, hashedPassword]);
+      await client.query("INSERT INTO users (name, email, crypted_password) VALUES ($1, $2, $3)", [username, email, hashedPassword]);
       // DB反映
       await client.query("COMMIT");
 
-      return res.json({
+      return res.status(200).json({
         msg: "ユーザ登録が成功しました!!"
       });
     } catch(err) {
-      console.log("ROLLBACKROLLBACKROLLBACKROLLBACKROLLBACKROLLBACKROLLBACKROLLBACKROLLBACKROLLBACKROLLBACKROLLBACK");
       await client.query("ROLLBACK"); // DB変更を元に戻す
       throw err;
     } finally {
-      console.log("finallyfinallyfinallyfinallyfinallyfinallyfinallyfinallyfinallyfinallyfinally");
+      // DB切断
       client.release();
     }
   })().catch(err => {
     res.json({
-      msg: "ユーザ登録が成功しました!!"
+      msg: "ユーザ登録に失敗しました!!"
     });
     throw err;
   });
 
 });
+
+// ログイン処理のバリデーションチェックルール
+const loginValidationRules = [
+  check("username").not().isEmpty().withMessage("メールアドレスを入力してください"),
+  check("password").not().isEmpty().withMessage("パスワードを入力してください").isLength({ min: 6 }).withMessage("6文字以上入力してください")
+];
+
+// passportによるログイン認証
+// ログイン認証処理
+passport.use("local",
+  new LocalStrategy((username, password, done) => {
+
+    (async () => {
+      const client = await pool.connect();
+      // メールアドレスで検索
+      let users = await client.query("SELECT * FROM users WHERE email = $1", [username]);
+      if (users.rows.length > 0) {
+        // ユーザ取得ができた場合、パスワードチェック
+        const user = users.rows[0];
+
+        if (bcrypt.compareSync(password, user.crypted_password)) {
+          // 入力パスワードとハッシュ化したパスワードを比較
+          return done(null, user, {status: 200, message: "ログインに成功しました!!"});
+        } else {
+          // ログイン失敗（パスワード入力エラー）
+          return done(null, false, {status: 400, message: "ログインに失敗しました。"});
+        }
+      } else {
+        // 入力したメールアドレスが存在しない
+        return done(null, false, {status: 400, message: "ログインに失敗しました。"});
+      }
+    })().catch(err => {
+      throw err;
+    });
+  })
+);
+
+// ユーザログイン処理
+router.post("/login", loginValidationRules, (req, res, next) => {
+  // 入力チェック
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    // バリデーションエラーの場合、フロント側でエラーチェックしているためサーバーエラーとする
+    return res.status(500).json(errors.array());
+  }
+  // next();
+  passport.authenticate("local", (err, user, info) => {
+    req.login(user, (err) => {
+      if (err) {
+        console.log("fjeijwfijiowejfijew");
+        return next(err)
+      }
+
+      if (req.isAuthenticated()) {
+        // 認証済みなら処理続行
+        console.log("認証済み認証済み認証済み認証済み");
+        next();
+      }
+      
+      // ログイン成功か失敗をフロントに返す
+      res.status(info.status).json({
+        username: user.name,
+        email: user.email,
+        msg: info.message
+      });
+    })
+  })(req, res, next); // authenticateの関数の中でm大枠の引数が扱える
+});
+
+// ログアウト
+router.get("/logout", (req, res) => {
+  req.logout();
+  res.status(200).json({ msg: "ログアウトしました。" });
+});
+
+// 認証チェック
+router.get("/auth", checkAuthentication, (req, res) => {
+  res.status(200).json({ user: req.user });
+});
+
+// 認証状態を返す
+function checkAuthentication(req, res, next) {
+  if (req.isAuthenticated()) {
+    // 認証済みなら処理続行
+    console.log("認証済み認証済み認証済み認証済み");
+    next();
+  } else {
+    // 認証していない場合No Contentを返し終了
+    console.log("認証してない");
+    res.status(204).json({ msg: "ログインしてください。" });
+  }
+}
+
+// // ユーザログイン処理
+// router.post("/login", loginValidationRules, (req, res, next) => {
+//   // 入力チェック
+//   const errors = validationResult(req);
+//   if (!errors.isEmpty()) {
+//     // バリデーションエラーの場合、フロント側でエラーチェックしているためサーバーエラーとする
+//     return res.status(500).json(errors.array());
+//   }
+//   next();
+// }, passport.authenticate("local", (err, user, info) => {
+//   // 認証結果
+//   // ここのuserの中身でログイン処理成功失敗を画面側に返す
+  
+//   console.log(err);
+//   console.log("errorerrorerrorerrorerrorerrorerrorerrorerrorerrorerrorerrorerrorerror");
+//   console.log(res);
+//   console.log("useruseruseruseruseruseruseruseruseruseruseruseruseruseruseruseruserus");
+// })(req, res, next), (req, res) => {
+
+//   const email = req.body.email;
+//   const password = req.body.password;
+
+//   console.log("最後のreq, res");
+//   (async () => {
+//     const client = await pool.connect();
+//     try {
+//       // メールアドレスで検索
+//       let users = await client.query("SELECT * FROM users WHERE email = $1", [email]);
+//       if (users.rows.length > 0) {
+//         // ユーザ取得ができた場合、パスワードチェック
+//         const user = users.rows[0];
+//         if (bcrypt.compareSync(password, user.crypted_password)) {
+//           // 入力パスワードとハッシュ化したパスワードを比較
+//           res.status(200).json({
+//             msg: "ログインに成功しました!!"
+//           });
+//         } else {
+//           // ログイン失敗（パスワード入力エラー）
+//           res.status(400).json({
+//             msg: "ログインに失敗しました。"
+//           });
+//         }
+//       }
+//     } catch(err) {
+//       res.status(400).json({
+//         msg: "ログインに失敗しました。"
+//       });
+//       throw err;
+//     } finally {
+//       // DB切断
+//       client.release();
+//     }
+//   })().catch(err => {
+//     throw err;
+//   });
+// });
 
 module.exports = router;

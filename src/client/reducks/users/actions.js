@@ -1,20 +1,26 @@
-// export const SET_ERROR_MESSAGE = "SET_ERROR_MESSAGE";
-// export const setErrorMessageAction = (users) => {
-//   return {
-//     type: "SET_ERROR_MESSAGE",
-//     payload: {
-//       errorMessages: users.errorMessages
-//     }
-//   }
-// }
 export const SET_LOGIN_INFO = "SET_LOGIN_INFO";
-export const signInAction = (users) => {
+export const  signInAction = (users) => {
   return {
     type: "SET_LOGIN_INFO",
     payload: {
-      name: users.name,
+      username: users.username,
       email: users.email,
-      isSignedIn: true
+      isSignedIn: true,
+    }
+  }
+}
+
+export const SIGN_OUT = "SIGN_OUT";
+export const signOutAction = () => {
+  // returnでreducersにtypeとpayloadを渡す
+  return {
+    type: "SIGN_OUT",
+    payload: {
+      isSignedIn: false,
+      uid: "",
+      username: "",
+      email: "",
+      errorMessages: []
     }
   }
 }

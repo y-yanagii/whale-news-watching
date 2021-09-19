@@ -2,6 +2,9 @@ import express from "express";
 import path from "path";
 import config from "config";
 import { logger } from "./logger";
+import passport from "passport";
+import accountcontrol from "./lib/accountcontrol";
+import session from "express-session";
 import NewsAPI from "newsapi";
 
 const app = express();
@@ -11,6 +14,22 @@ const app = express();
 const serverConfig = config.get("server");
 
 app.use(express.static(path.resolve("./", "dist")));
+
+// セッション情報の設定(認証ミドルウェアの設定よりも前に行わないといけない)
+app.use(session({
+  secret: "keyboard cat",
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    maxAge: 1000 * 60 * 60 * 24 * 30,
+  }
+}));
+
+// 認証ミドルウェアの設定
+app.use(passport.initialize());
+app.use(...accountcontrol.initialize()); // ...記法。（initializeは配列なので配列をカンマ区切りで渡す）
+// セッション情報ミドルウェアの初期化
+app.use(passport.session());
 
 // post通信を扱うためのミドルウェアの設定
 app.use(express.json());

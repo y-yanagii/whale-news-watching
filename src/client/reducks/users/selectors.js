@@ -9,10 +9,10 @@ export const getUserId = createSelector(
 
 export const getUserName = createSelector(
   [usersSelector],
-  state => state.name
+  state => state.username
 );
 
 export const getIsSignedIn = createSelector(
   [usersSelector],
   state => state.isSignedIn
-)
+);

@@ -77,26 +77,26 @@ const SignUp = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
 
-  const [name, setName] = useState(""),
+  const [username, setUsername] = useState(""),
         [email, setEmail] = useState(""),
         [password, setPassword] = useState(""),
         [passwordConfirmation, setPasswordConfirmation] = useState("");
 
-  const [inputErrorName, setInputErrorName] = useState(false),
+  const [inputErrorUsername, setInputErrorUsername] = useState(false),
         [inputErrorEmail, setInputErrorEmail] = useState(false),
         [inputErrorPassword, setInputErrorPassword] = useState(false),
         [inputErrorPasswordConfirmation, setInputErrorPasswordConfirmation] = useState(false);
 
-  const inputNameRef = useRef(null);
+  const inputUsernameRef = useRef(null);
   const inputEmailRef = useRef(null);
   const inputPasswordRef = useRef(null);
   const inputPasswordConfirmationRef = useRef(null);
 
   // useCallback
-  const inputName = useCallback((event) => {
-    setName(event.target.value);
-    handleChange(inputNameRef, setInputErrorName);
-  }, [setName]);
+  const inputUsername = useCallback((event) => {
+    setUsername(event.target.value);
+    handleChange(inputUsernameRef, setInputErrorUsername);
+  }, [setUsername]);
 
   const inputEmail = useCallback((event) => {
     setEmail(event.target.value);
@@ -135,12 +135,12 @@ const SignUp = () => {
     }
 
     // 入力項目のバリデーションチェック
-    handleChange(inputNameRef, setInputErrorName);
+    handleChange(inputUsernameRef, setInputErrorUsername);
     handleChange(inputEmailRef, setInputErrorEmail);
     handleChange(inputPasswordRef, setInputErrorPassword);
     handleChange(inputPasswordConfirmationRef, setInputErrorPasswordConfirmation);
 
-    if (!inputNameRef.current.validity.valid
+    if (!inputUsernameRef.current.validity.valid
       || !inputEmailRef.current.validity.valid
       || !inputPasswordRef.current.validity.valid
       || !inputPasswordConfirmationRef.current.validity.valid) { 
@@ -156,7 +156,7 @@ const SignUp = () => {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        name: name,
+        username: username,
         email: email,
         password: password,
         passwordConfirmation: passwordConfirmation
@@ -177,7 +177,7 @@ const SignUp = () => {
         throw new Error(`${res.status} ${res.statusText}`);
       }
       // ログイン状態の保持
-      dispatch(signUp(name, email));
+      dispatch(signUp(username, email));
       // 一覧情報に遷移
       dispatch(push("/"));
     }).catch((err) => {
@@ -225,9 +225,9 @@ const SignUp = () => {
           <div className="module-spacer--small" />
 
           <TextInputOutline
-            fullWidth={true} label={"Name"} multiline={false} required={true}
-            rows={1} value={name} type={"name"} onChange={inputName} inputProps={{ maxLength: 30, required: true }}
-            inputRef={inputNameRef} inputError={inputErrorName}
+            fullWidth={true} label={"Username"} multiline={false} required={true}
+            rows={1} value={username} type={"username"} onChange={inputUsername} inputProps={{ maxLength: 30, required: true }}
+            inputRef={inputUsernameRef} inputError={inputErrorUsername}
           />
           <TextInputOutline
             fullWidth={true} label={"Email"} multiline={false} required={true}
