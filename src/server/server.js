@@ -15,15 +15,7 @@ const serverConfig = config.get("server");
 
 app.use(express.static(path.resolve("./", "dist")));
 
-// 認証ミドルウェアの設定
-app.use(passport.initialize());
-app.use(...accountcontrol.initialize()); // ...記法。（initializeは配列なので配列をカンマ区切りで渡す）
-
-// post通信を扱うためのミドルウェアの設定
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-// セッション
+// セッション情報の設定(認証ミドルウェアの設定よりも前に行わないといけない)
 app.use(session({
   secret: "keyboard cat",
   resave: false,
@@ -32,6 +24,16 @@ app.use(session({
     maxAge: 1000 * 60 * 60 * 24 * 30,
   }
 }));
+
+// 認証ミドルウェアの設定
+app.use(passport.initialize());
+app.use(...accountcontrol.initialize()); // ...記法。（initializeは配列なので配列をカンマ区切りで渡す）
+// セッション情報ミドルウェアの初期化
+app.use(passport.session());
+
+// post通信を扱うためのミドルウェアの設定
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // api用のrouter読み込み(即時関数)
 app.use("/api", (() => {
