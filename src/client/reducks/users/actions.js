@@ -1,11 +1,11 @@
 export const SET_LOGIN_INFO = "SET_LOGIN_INFO";
-export const signInAction = (users) => {
+export const  signInAction = (users) => {
   return {
     type: "SET_LOGIN_INFO",
     payload: {
       username: users.username,
       email: users.email,
-      isSignedIn: true
+      isSignedIn: true,
     }
   }
 }

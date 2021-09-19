@@ -30,7 +30,8 @@ export const listenAuthState = () => {
     fetch(url)
     .then(res => res.json())
     .then((resData) => {
-      console.log(resData);
+      // ユーザ情報をredux管理
+      dispatch(signInAction({ username: resData.username, email: resData.email }));
     });
   }
 }
