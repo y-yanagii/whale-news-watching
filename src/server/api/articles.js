@@ -10,7 +10,7 @@ router.get("/", (req, res) => {
       throw err;
     } else {
       client.query("SELECT * FROM articles ORDER BY published_at", function (err, result) {
-        res.json(result.rows);
+        res.status(200).json(result.rows);
       });
     }
   });
@@ -18,7 +18,6 @@ router.get("/", (req, res) => {
 
 // 記事詳細情報取得
 router.get("/:id", (req, res) => {
-  console.log("/api/articles/:id");
   const id = req.params.id;
   pool.connect(function(err, client) {
     try {
@@ -27,12 +26,10 @@ router.get("/:id", (req, res) => {
       }
 
       client.query("SELECT * FROM articles WHERE id = $1", [id], function(err, result) {
-        res.json(result.rows[0]);
+        res.status(200).json(result.rows[0]);
       });
     } catch {
       throw err
-    } finally {
-      client.release();
     }
   })
 });

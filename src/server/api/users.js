@@ -123,13 +123,11 @@ router.post("/login", loginValidationRules, (req, res, next) => {
   passport.authenticate("local", (err, user, info) => {
     req.login(user, (err) => {
       if (err) {
-        console.log("fjeijwfijiowejfijew");
         return next(err)
       }
 
       if (req.isAuthenticated()) {
         // 認証済みなら処理続行
-        console.log("認証済み認証済み認証済み認証済み");
         next();
       }
       
@@ -158,11 +156,9 @@ router.get("/auth", checkAuthentication, (req, res) => {
 function checkAuthentication(req, res, next) {
   if (req.isAuthenticated()) {
     // 認証済みなら処理続行
-    console.log("認証済み認証済み認証済み認証済み");
     next();
   } else {
     // 認証していない場合No Contentを返し終了
-    console.log("認証してない");
     res.status(204).json({ msg: "ログインしてください。" });
   }
 }
