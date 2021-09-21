@@ -40,9 +40,12 @@ const ArticleDetail = () => {
       <Container maxWidth="lg">
         <div className={classes.detailArea}>
           { article && (
-            <div>{article.title}</div>
+            <>
+              <div>{article.title}</div>
+              <div>{article.created_at}</div>
+              <div>{article.description}</div>
+            </>
           )}
-          <div>aaaaaaaaaaaaaa</div>
         </div>
       </Container>
     </>
