@@ -156,8 +156,10 @@ router.get("/auth", checkAuthentication, (req, res) => {
 function checkAuthentication(req, res, next) {
   if (req.isAuthenticated()) {
     // 認証済みなら処理続行
+    console.log("認証〜〜〜〜〜！");
     next();
   } else {
+    console.log("認証じゃないよ〜〜〜〜〜！");
     // 認証していない場合No Contentを返し終了
     res.status(204).json({ msg: "ログインしてください。" });
   }

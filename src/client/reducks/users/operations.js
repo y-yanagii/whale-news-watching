@@ -30,8 +30,16 @@ export const listenAuthState = () => {
     fetch(url)
     .then(res => res.json())
     .then((resData) => {
-      // ユーザ情報をredux管理
-      dispatch(signInAction({ username: resData.username, email: resData.email }));
+      if (typeof resData === "undefined") {
+        // ログイン画面に遷移
+        dispatch(push("/signin"));
+      } else {
+        // ユーザ情報をredux管理
+        dispatch(signInAction({
+          username: resData.username,
+          email: resData.email
+        }));
+      }
     });
   }
 }
@@ -47,7 +55,6 @@ export const signOut = () => {
       // reduxで管理しているログイン情報を削除
       dispatch(signOutAction());
       // スタートページに遷移
-      console.log(resData);
       dispatch(push("/"));
     })
   }
