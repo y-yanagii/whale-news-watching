@@ -15,7 +15,8 @@ const ArticleDetail = () => {
   const classes = useStyles();
   const location = useLocation();
   let id = location.pathname.split("/articles")[1]; // :id部分をURLから取得
-  const [article, setArticle] = useState(null);
+  const [article, setArticle] = useState(null); // 記事情報
+  const [publishedAt, setPublishedAt] = useState(""); // 記事投稿日時
 
   if (id !== "") {
     // 記事情報IDが存在した場合、IDとして変数保持
@@ -30,15 +31,12 @@ const ArticleDetail = () => {
       fetch("/api/articles/" + id)
       .then(res => res.json())
       .then((data) => {
-        console.log(data);
+        // 記事情報をセット
         setArticle(data);
-        let date = new Date(data.created_at);
-        // yyyy/mm/dd/ hh:mmの型に変換
+        // published_atをyyyy/mm/dd/ hh:mmの型に変換
+        let date = new Date(data.published_at);
         let formattedDate = `${date.getUTCFullYear()}/${padStartWithZero((date.getUTCMonth() + 1))}/${padStartWithZero(date.getUTCDate())} ${padStartWithZero(date.getHours())}:${padStartWithZero(date.getMinutes())}`;
-        console.log(date);
-        console.log(formattedDate);
-        console.log(data.created_at);
-        console.log(typeof(date.getUTCDate()));
+        setPublishedAt(formattedDate);
       });
     }
   }, [id]);
@@ -50,8 +48,12 @@ const ArticleDetail = () => {
           { article && (
             <>
               <div>{article.title}</div>
-              <div>{article.created_at}</div>
+              <div>{article.source_name}</div>
+              <div>{article.author}</div>
+              <div>{publishedAt}</div>
               <div>{article.description}</div>
+              <div>{article.url}</div>
+              <div>{article.url_to_image}</div>
             </>
           )}
         </div>
