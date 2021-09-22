@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router";
 import Container from "@material-ui/core/Container";
 import { makeStyles } from "@material-ui/core/styles";
+import { padStartWithZero } from "../lib/common";
 
 const useStyles = makeStyles((theme) => ({
   detailArea: {
@@ -33,7 +34,7 @@ const ArticleDetail = () => {
         setArticle(data);
         let date = new Date(data.created_at);
         // yyyy/mm/dd/ hh:mmの型に変換
-        let formattedDate = `${date.getUTCFullYear()}/${(date.getUTCMonth() + 1).toString().padStart(5, "0")}/${date.getUTCDate()} ${date.getHours()}:${date.getMinutes()}`;
+        let formattedDate = `${date.getUTCFullYear()}/${padStartWithZero((date.getUTCMonth() + 1))}/${padStartWithZero(date.getUTCDate())} ${padStartWithZero(date.getHours())}:${padStartWithZero(date.getMinutes())}`;
         console.log(date);
         console.log(formattedDate);
         console.log(data.created_at);
