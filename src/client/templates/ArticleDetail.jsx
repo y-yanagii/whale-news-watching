@@ -32,11 +32,12 @@ const ArticleDetail = () => {
         console.log(data);
         setArticle(data);
         let date = new Date(data.created_at);
-        // yyyy/m/dの型に変換
-        let formattedDate = `${date.getUTCFullYear()}/${(date.getUTCMonth() + 1)}/${date.getUTCDate()}`;
+        // yyyy/mm/dd/ hh:mmの型に変換
+        let formattedDate = `${date.getUTCFullYear()}/${(date.getUTCMonth() + 1).toString().padStart(5, "0")}/${date.getUTCDate()} ${date.getHours()}:${date.getMinutes()}`;
+        console.log(date);
         console.log(formattedDate);
         console.log(data.created_at);
-        console.log(typeof(data.created_at));
+        console.log(typeof(date.getUTCDate()));
       });
     }
   }, [id]);
