@@ -31,6 +31,12 @@ const ArticleDetail = () => {
       .then((data) => {
         console.log(data);
         setArticle(data);
+        let date = new Date(data.created_at);
+        // yyyy/m/dの型に変換
+        let formattedDate = `${date.getUTCFullYear()}/${(date.getUTCMonth() + 1)}/${date.getUTCDate()}`;
+        console.log(formattedDate);
+        console.log(data.created_at);
+        console.log(typeof(data.created_at));
       });
     }
   }, [id]);
