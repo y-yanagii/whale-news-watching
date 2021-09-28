@@ -149,6 +149,7 @@ router.get("/logout", (req, res) => {
 
 // 認証チェック
 router.get("/auth", checkAuthentication, (req, res) => {
+  console.log(req.user);
   res.status(200).json({ user: req.user });
 });
 

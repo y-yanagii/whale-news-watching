@@ -7,11 +7,56 @@ import { padStartWithZero } from "../lib/common";
 const useStyles = makeStyles((theme) => ({
   detailArea: {
     marginTop: "130px"
+  },
+  contentHeader: {
+    background: "#242424",
+    overflow: "hidden",
+    position: "relative",
+    minHeight: "150px",
+    borderRadius: "4px"
+  },
+  articleImg: {
+    position: "absolute",
+    opacity: ".4",
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "center",
+    backgroundSize: "cover",
+    "-webkitFilter": "blur(2px)",
+    transform: "scale(1.3)",
+    minHeight: "200px",
+    width: "100%"
+  },
+  headerBody: {
+    position: "relative",
+    display: "table",
+    margin: "0 auto",
+    width: "100%",
+    padding: "15px 42px",
+    overflow: "hidden"
+  },
+  imgCircle: {
+    width: "120px",
+    height: "120px",
+    margin: "auto 20px auto auto",
+    display: "table-cell",
+    "-mozBackgroundSize": "cover",
+    "-oBackgroundSize": "cover",
+    "-webkitBackgroundSize": "cover",
+    "backgroundSize": "cover",
+    backgroundPosition: "center center",
+    backgroundRepeat: "no-repeat",
+    "-mozBorderRadius": "50%",
+    "-webkitBorderRadius": "50%",
+    borderRadius: "50%"
+  },
+  hederContent: {
+    width: "100%",
+    display: "table-cell",
+    verticalAlign: "top",
   }
 }));
 
 const ArticleDetail = () => {
-  console.log("記事詳細コンポーネントが読み込まれた");
   const classes = useStyles();
   const location = useLocation();
   let id = location.pathname.split("/articles")[1]; // :id部分をURLから取得
@@ -46,15 +91,24 @@ const ArticleDetail = () => {
       <Container maxWidth="lg">
         <div className={classes.detailArea}>
           { article && (
-            <>
-              <div>{article.title}</div>
-              <div>{article.source_name}</div>
-              <div>{article.author}</div>
-              <div>{publishedAt}</div>
-              <div>{article.description}</div>
-              <div>{article.url}</div>
-              <div>{article.url_to_image}</div>
-            </>
+          <>
+            <div className={classes.contentHeader}>
+              <img src={article.url_to_image} alt={article.title} className={classes.articleImg} />
+              <div className={classes.headerBody}>
+                <img src={article.url_to_image} alt={article.title} className={classes.imgCircle} />
+                <div className={classes.hederContent}>
+                  <h1>{article.title}</h1>
+                  <div>
+                    <div>登録日： {publishedAt}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>著者： {article.author}</div>
+            <div>記事のWebサイト： <a href={"https://" + article.source_name} rel="noreferrer" target="_blank">{article.source_name}</a></div>
+            <div>{article.description}</div>
+            <div>{article.url}</div>
+          </>
           )}
         </div>
       </Container>
