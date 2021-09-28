@@ -64,7 +64,7 @@ const ArticleMiddleArea = (props) => {
   return (
     <Paper className={classes.paper}>
       <Card
-        onClick={() => console.log(props)}
+        onClick={() => props.showDetail(props.id)}
       >
         <CardActionArea>
           <CardMedia
@@ -93,7 +93,8 @@ ArticleMiddleArea.propTypes = {
   description: PropTypes.string,
   url: PropTypes.string,
   content: PropTypes.string,
-  publishedAt: PropTypes.string
+  publishedAt: PropTypes.string,
+  showDetail: PropTypes.func
 }
 
 export default ArticleMiddleArea;

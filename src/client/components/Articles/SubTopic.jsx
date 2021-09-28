@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useCallback } from "react";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import { Paper } from "@material-ui/core";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardMedia from "@material-ui/core/CardMedia";
+import { useDispatch } from "react-redux";
+import { push } from "connected-react-router";
 
 const useStyles = makeStyles({
   // サブトピックスの最外側要素
@@ -47,13 +49,19 @@ const SubTopic = (props) => {
   const classes = useStyles();
 
   const subArticles = props.subArticles;
+  const dispatch = useDispatch();
+
+  const goToArticleDetail = useCallback((id) => {
+    // 記事詳細画面へ遷移
+    dispatch(push(`/articles/${id}`));
+  });
 
   return (
     <>
       {subArticles.map((article, i) => (
         <Paper key={i} className={classes.paper}>
           <Card
-            onClick={() => { console.log(article) }}
+            onClick={() => goToArticleDetail(article.id)}
           >
             <CardActionArea>
               <CardMedia

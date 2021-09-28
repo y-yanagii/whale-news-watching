@@ -3,6 +3,8 @@ import { useLocation } from "react-router";
 import Container from "@material-ui/core/Container";
 import { makeStyles } from "@material-ui/core/styles";
 import { padStartWithZero } from "../lib/common";
+import Button from "@material-ui/core/Button";
+import DescriptionIcon from "@material-ui/icons/Description"
 
 const useStyles = makeStyles((theme) => ({
   detailArea: {
@@ -53,6 +55,17 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     display: "table-cell",
     verticalAlign: "top",
+  },
+  descriptionArea: {
+    margin: "3% auto"
+  },
+  buttonArea: {
+    margin: "2% auto",
+    textAlign: "center"
+  },
+  button: {
+    width: "60%",
+    color: "white"
   }
 }));
 
@@ -104,10 +117,24 @@ const ArticleDetail = () => {
                 </div>
               </div>
             </div>
+            <div className={classes.descriptionArea}>
+              <div>{article.description}</div>
+              <div className={classes.buttonArea}>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  className={classes.button}
+                  endIcon={<DescriptionIcon />}
+                  href={article.url}
+                  rel="noreferrer"
+                  target="_blank"
+                >
+                ...全文読む
+                </Button>
+              </div>
+            </div>
             <div>著者： {article.author}</div>
             <div>記事のWebサイト： <a href={"https://" + article.source_name} rel="noreferrer" target="_blank">{article.source_name}</a></div>
-            <div>{article.description}</div>
-            <div>{article.url}</div>
           </>
           )}
         </div>
