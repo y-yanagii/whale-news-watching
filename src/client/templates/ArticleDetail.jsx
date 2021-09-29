@@ -75,17 +75,16 @@ const ArticleDetail = () => {
   let id = location.pathname.split("/articles")[1]; // :id部分をURLから取得
   const [article, setArticle] = useState(null); // 記事情報
   const [publishedAt, setPublishedAt] = useState(""); // 記事投稿日時
-
+  
   if (id !== "") {
     // 記事情報IDが存在した場合、IDとして変数保持
     id = id.split("/")[1];
   }
   
   useEffect(() => {
-    console.log("記事詳細");
-    console.log(id);
-    if (typeof id !== "undefined") {
+    if (typeof id !== "undefined" && id !== "") {
       // 記事情報取得
+      console.log("記事詳細取得");
       fetch("/api/articles/" + id)
       .then(res => res.json())
       .then((data) => {

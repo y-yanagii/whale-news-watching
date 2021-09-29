@@ -53,6 +53,7 @@ const SubTopic = (props) => {
 
   const goToArticleDetail = useCallback((id) => {
     // 記事詳細画面へ遷移
+    console.log("aaa");
     dispatch(push(`/articles/${id}`));
   });
 
