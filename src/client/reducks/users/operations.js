@@ -27,7 +27,10 @@ export const listenAuthState = () => {
   return async (dispatch) => {
     // 認証済みチェック
     const url = "api/users/auth";
-    fetch(url)
+    fetch(url, {
+      mode: "cors",
+      credentials: "include"
+    })
     .then(res => res.json())
     .then((resData) => {
       if (typeof resData === "undefined") {
@@ -49,7 +52,10 @@ export const signOut = () => {
   return async (dispatch) => {
     // 認証情報の削除
     const url = "api/users/logout";
-    fetch(url)
+    fetch(url, {
+      mode: "cors",
+      credentials: "include"
+    })
     .then(res => res.json())
     .then((resData) => {
       // reduxで管理しているログイン情報を削除

@@ -130,6 +130,8 @@ const SignIn = () => {
       headers: {
         "Content-Type": "application/json"
       },
+      mode: "cors",
+      credentials: "include",
       body: JSON.stringify({
         username: email,
         password: password

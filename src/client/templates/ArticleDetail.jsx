@@ -85,7 +85,10 @@ const ArticleDetail = () => {
     if (typeof id !== "undefined" && id !== "") {
       // 記事情報取得
       console.log("記事詳細取得");
-      fetch("/api/articles/" + id)
+      fetch("api/articles/" + id, {
+        mode: "cors",
+        credentials: "include"
+      })
       .then(res => res.json())
       .then((data) => {
         // 記事情報をセット

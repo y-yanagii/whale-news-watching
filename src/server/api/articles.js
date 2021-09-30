@@ -3,6 +3,7 @@ let router = require("express").Router();
 
 // 記事情報一覧取得
 router.get("/", (req, res) => {
+  console.log("記事一覧取得");
   // DB接続
   pool.connect(function(err, client) {
     if (err) {
@@ -18,6 +19,7 @@ router.get("/", (req, res) => {
 
 // 記事詳細情報取得
 router.get("/:id", (req, res) => {
+  console.log("記事詳細取得");
   const id = req.params.id;
   pool.connect(function(err, client) {
     try {

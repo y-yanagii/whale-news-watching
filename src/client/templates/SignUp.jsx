@@ -149,12 +149,14 @@ const SignUp = () => {
     }
 
     // ユーザ登録処理
-    const url = "/api/users/regist";
+    const url = "api/users/regist";
     fetch(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
+      mode: "cors",
+      credentials: "include",
       body: JSON.stringify({
         username: username,
         email: email,
