@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import PropTypes from "prop-types";
 import Carousel from "react-material-ui-carousel";
 import { makeStyles } from "@material-ui/core/styles";
@@ -6,6 +6,8 @@ import { Paper } from "@material-ui/core";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardMedia from "@material-ui/core/CardMedia";
+import { useDispatch } from "react-redux";
+import { push } from "connected-react-router";
 
 const useStyles = makeStyles({
   // 画像
@@ -45,6 +47,13 @@ const SlideTopic = (props) => {
   const classes = useStyles();
 
   const articles = props.slideArticles;
+  const dispatch = useDispatch();
+
+  const goToArticleDetail = useCallback((id) => {
+    // 記事詳細画面へ遷移
+    console.log("aaa");
+    dispatch(push(`/articles/${id}`));
+  });
 
   return (
     <>
@@ -55,7 +64,7 @@ const SlideTopic = (props) => {
         {articles.map((article, i) => (
           <Paper key={i}>
             <Card
-              onClick={() => { console.log(article) }}
+              onClick={() => goToArticleDetail(article.id)}
             >
               <CardActionArea>
                 <CardMedia

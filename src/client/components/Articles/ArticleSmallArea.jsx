@@ -39,7 +39,7 @@ const ArticleSmallArea = (props) => {
   const classes = useStyles();
 
   return (
-    <ListItem className={classes.list}>
+    <ListItem className={classes.list} onClick={() => props.showDetail(props.id)}>
       <ListItemText
         primary={props.title}
         className={classes.listText}
@@ -63,7 +63,8 @@ ArticleSmallArea.propTypes = {
   description: PropTypes.string,
   url: PropTypes.string,
   content: PropTypes.string,
-  publishedAt: PropTypes.string
+  publishedAt: PropTypes.string,
+  showDetail: PropTypes.func
 }
 
 export default ArticleSmallArea;

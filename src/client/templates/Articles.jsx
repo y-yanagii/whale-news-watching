@@ -33,14 +33,17 @@ const Articles = () => {
     //   throw error;
     // }
 
-    // fetch("/api/articles").then(res => {
+    // fetch("api/articles").then(res => {
     //   console.log(res.json());
     // });
   }
 
   // componentDidMountと同等
   useEffect(() => {
-    fetch("/api/articles")
+    fetch("api/articles", {
+      mode: "cors",
+      credentials: "include"
+    })
     .then(res => res.json()) // 戻り値のjsonを受け取る
     .then((data) => {
       const newArticles = [];
@@ -69,7 +72,7 @@ const Articles = () => {
       setTopicsArticles(prevTopicsArticles => [...prevTopicsArticles, ...newArticles.slice(0, 5)]);
     });
     console.log("123456789");
-  }, []);
+  }, [setArticles, setTopicsArticles]);
 
   return (
     <>

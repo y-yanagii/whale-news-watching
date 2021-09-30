@@ -15,6 +15,14 @@ const serverConfig = config.get("server");
 
 app.use(express.static(path.resolve("./", "dist")));
 
+// CORSを許可許可する
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  console.log("CORS許可");
+  next();
+});
+
 // セッション情報の設定(認証ミドルウェアの設定よりも前に行わないといけない)
 app.use(session({
   secret: "keyboard cat",
